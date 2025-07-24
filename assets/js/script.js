@@ -161,11 +161,15 @@
         const heroActions = document.querySelector('.hero-actions');
 
         if (heroTitle) {
-            // Split text for character animation
-            const text = heroTitle.innerHTML;
-            heroTitle.innerHTML = text.split('').map((char, index) => 
-                `<span style="animation-delay: ${index * 0.05}s" class="char-animate">${char}</span>`
-            ).join('');
+            // Simple fade-in animation instead of character splitting
+            heroTitle.style.opacity = '0';
+            heroTitle.style.transform = 'translateY(20px)';
+            heroTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            
+            setTimeout(() => {
+                heroTitle.style.opacity = '1';
+                heroTitle.style.transform = 'translateY(0)';
+            }, 300);
         }
 
         // Animate hero elements on load
@@ -587,37 +591,24 @@
         const typingElement = document.querySelector('.typing-text');
         if (!typingElement) return;
 
-        const texts = ['Transforming Technology', 'Empowering Careers', 'Building Futures'];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentText = texts[textIndex];
-            
-            if (isDeleting) {
-                typingElement.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingElement.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentText.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % texts.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(type, typeSpeed);
-        }
-
-        type();
+        // Store the original text
+        const originalText = typingElement.textContent || 'Transforming Technology';
+        
+        // Set the initial text content properly
+        typingElement.textContent = originalText;
+        
+        // Remove any conflicting CSS animations
+        typingElement.style.animation = 'none';
+        typingElement.style.overflow = 'visible';
+        typingElement.style.whiteSpace = 'normal';
+        typingElement.style.borderRight = 'none';
+        
+        // Simple fade-in effect instead of typing
+        typingElement.style.opacity = '0';
+        setTimeout(() => {
+            typingElement.style.transition = 'opacity 1s ease-in';
+            typingElement.style.opacity = '1';
+        }, 500);
     }
 
     // Theme Toggle (Dark/Light Mode)
