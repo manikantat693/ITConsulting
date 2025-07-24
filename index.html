@@ -53,41 +53,127 @@
         </div>
     </div>
 
-    <!-- Live Chat Widget -->
-    <div class="chat-widget" id="chat-widget">
-        <div class="chat-toggle" id="chat-toggle">
-            <i class="fas fa-comments"></i>
-            <span class="chat-notification">1</span>
+    <!-- Advanced AI Assistant Widget -->
+    <div class="ai-assistant" id="ai-assistant">
+        <div class="ai-toggle" id="ai-toggle">
+            <div class="ai-avatar">
+                <div class="ai-pulse"></div>
+                <i class="fas fa-brain"></i>
+            </div>
+            <span class="ai-notification" id="ai-notification">Ask me anything!</span>
         </div>
-        <div class="chat-window" id="chat-window">
-                            <div class="chat-header">
-                    <h4><i class="fas fa-passport"></i> Immigration Assistant</h4>
-                    <button class="chat-close" id="chat-close">
+        
+        <div class="ai-window" id="ai-window">
+            <div class="ai-header">
+                <div class="ai-status">
+                    <div class="ai-indicator online"></div>
+                    <div class="ai-info">
+                        <h4><i class="fas fa-robot"></i> CloudFlex AI Assistant</h4>
+                        <span class="ai-subtitle">Powered by Advanced AI • Always Learning</span>
+                    </div>
+                </div>
+                <div class="ai-controls">
+                    <button class="ai-voice-btn" id="ai-voice-btn" title="Voice Chat">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button class="ai-minimize" id="ai-minimize" title="Minimize">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="ai-close" id="ai-close" title="Close">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-            <div class="chat-messages" id="chat-messages">
-                <div class="message bot-message">
-                    <div class="message-avatar">
+            </div>
+
+            <div class="ai-capabilities">
+                <div class="capability-cards">
+                    <div class="capability-card" data-capability="immigration">
                         <i class="fas fa-passport"></i>
+                        <span>Immigration</span>
                     </div>
-                    <div class="message-content">
-                        <p>Hi! I'm your AI Immigration Assistant. I can help you with:</p>
-                        <div class="quick-options">
-                            <button class="quick-btn" data-topic="h1b">H1B Process</button>
-                            <button class="quick-btn" data-topic="greencard">Green Card</button>
-                            <button class="quick-btn" data-topic="timeline">Timeline</button>
-                            <button class="quick-btn" data-topic="documents">Documents</button>
-                        </div>
-                        <p><small>Select a topic or type your immigration question!</small></p>
+                    <div class="capability-card" data-capability="jobs">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Job Search</span>
+                    </div>
+                    <div class="capability-card" data-capability="consulting">
+                        <i class="fas fa-cogs"></i>
+                        <span>IT Consulting</span>
+                    </div>
+                    <div class="capability-card" data-capability="career">
+                        <i class="fas fa-rocket"></i>
+                        <span>Career Growth</span>
                     </div>
                 </div>
             </div>
-            <div class="chat-input">
-                <input type="text" id="chat-input-field" placeholder="Type your message...">
-                <button id="chat-send" class="chat-send-btn">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+
+            <div class="ai-messages" id="ai-messages">
+                <div class="message ai-message welcome-message">
+                    <div class="message-avatar">
+                        <div class="ai-thinking">
+                            <div class="thinking-dot"></div>
+                            <div class="thinking-dot"></div>
+                            <div class="thinking-dot"></div>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        <div class="ai-welcome">
+                            <h5>👋 Welcome to CloudFlex AI Assistant!</h5>
+                            <p>I'm your intelligent companion for:</p>
+                            <ul class="ai-features">
+                                <li><i class="fas fa-check-circle"></i> Immigration guidance (H1B, Green Card, Visa processes)</li>
+                                <li><i class="fas fa-check-circle"></i> Job opportunities and career advice</li>
+                                <li><i class="fas fa-check-circle"></i> IT consulting solutions</li>
+                                <li><i class="fas fa-check-circle"></i> Real-time market insights</li>
+                                <li><i class="fas fa-check-circle"></i> Personalized recommendations</li>
+                            </ul>
+                            <div class="quick-actions">
+                                <button class="quick-action" data-action="start-immigration">🏛️ Immigration Help</button>
+                                <button class="quick-action" data-action="find-jobs">💼 Find Jobs</button>
+                                <button class="quick-action" data-action="get-consulting">🚀 IT Consulting</button>
+                                <button class="quick-action" data-action="schedule-call">📞 Schedule Call</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-input-section">
+                <div class="ai-suggestions" id="ai-suggestions">
+                    <button class="suggestion-chip">What visa options do I have?</button>
+                    <button class="suggestion-chip">Show me latest job openings</button>
+                    <button class="suggestion-chip">How can CloudFlex help my business?</button>
+                </div>
+                
+                <div class="ai-input-container">
+                    <div class="ai-typing-indicator" id="ai-typing">
+                        <span>AI is thinking</span>
+                        <div class="typing-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-input-box">
+                        <textarea id="ai-input" placeholder="Ask me anything about immigration, jobs, IT consulting..." rows="1"></textarea>
+                        <div class="ai-input-actions">
+                            <button class="ai-attachment" id="ai-attachment" title="Attach File">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <button class="ai-emoji" id="ai-emoji" title="Add Emoji">
+                                <i class="fas fa-smile"></i>
+                            </button>
+                            <button class="ai-send" id="ai-send" title="Send Message">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-footer">
+                <div class="ai-powered">
+                    <span>Powered by CloudFlex AI • </span>
+                    <a href="#" class="ai-feedback">Give Feedback</a>
+                </div>
             </div>
         </div>
     </div>
