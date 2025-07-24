@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <defs>
+    <linearGradient id="heroGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="heroGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="heroGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Elements -->
+  <circle cx="500" cy="100" r="80" fill="url(#heroGradient1)" opacity="0.1"/>
+  <circle cx="100" cy="300" r="60" fill="url(#heroGradient2)" opacity="0.1"/>
+  <circle cx="450" cy="350" r="40" fill="url(#heroGradient3)" opacity="0.1"/>
+  
+  <!-- Main Laptop/Computer -->
+  <rect x="200" y="180" width="200" height="120" rx="8" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  <rect x="210" y="190" width="180" height="100" rx="4" fill="#212529"/>
+  
+  <!-- Screen Content -->
+  <rect x="220" y="200" width="160" height="8" rx="4" fill="url(#heroGradient1)" opacity="0.8"/>
+  <rect x="220" y="220" width="120" height="6" rx="3" fill="url(#heroGradient2)" opacity="0.6"/>
+  <rect x="220" y="235" width="140" height="6" rx="3" fill="url(#heroGradient3)" opacity="0.6"/>
+  <rect x="220" y="250" width="100" height="6" rx="3" fill="url(#heroGradient1)" opacity="0.4"/>
+  
+  <!-- Keyboard -->
+  <rect x="200" y="310" width="200" height="15" rx="4" fill="#e9ecef"/>
+  <g fill="#ced4da">
+    <rect x="210" y="315" width="8" height="5" rx="1"/>
+    <rect x="225" y="315" width="8" height="5" rx="1"/>
+    <rect x="240" y="315" width="8" height="5" rx="1"/>
+    <rect x="255" y="315" width="8" height="5" rx="1"/>
+    <rect x="270" y="315" width="8" height="5" rx="1"/>
+    <rect x="285" y="315" width="8" height="5" rx="1"/>
+    <rect x="300" y="315" width="8" height="5" rx="1"/>
+    <rect x="315" y="315" width="8" height="5" rx="1"/>
+    <rect x="330" y="315" width="8" height="5" rx="1"/>
+    <rect x="345" y="315" width="8" height="5" rx="1"/>
+    <rect x="360" y="315" width="8" height="5" rx="1"/>
+    <rect x="375" y="315" width="8" height="5" rx="1"/>
+  </g>
+  
+  <!-- Floating Code Elements -->
+  <g opacity="0.8">
+    <rect x="450" y="120" width="80" height="40" rx="6" fill="white" stroke="url(#heroGradient1)" stroke-width="2"/>
+    <text x="460" y="135" font-family="monospace" font-size="8" fill="url(#heroGradient1)">&lt;html&gt;</text>
+    <text x="460" y="150" font-family="monospace" font-size="8" fill="url(#heroGradient1)">&lt;/html&gt;</text>
+  </g>
+  
+  <g opacity="0.8">
+    <rect x="80" y="80" width="100" height="50" rx="6" fill="white" stroke="url(#heroGradient2)" stroke-width="2"/>
+    <text x="90" y="100" font-family="monospace" font-size="10" fill="url(#heroGradient2)">function() {</text>
+    <text x="90" y="115" font-family="monospace" font-size="10" fill="url(#heroGradient2)">  return true;</text>
+    <text x="90" y="125" font-family="monospace" font-size="10" fill="url(#heroGradient2)">}</text>
+  </g>
+  
+  <g opacity="0.8">
+    <rect x="450" y="250" width="90" height="35" rx="6" fill="white" stroke="url(#heroGradient3)" stroke-width="2"/>
+    <text x="460" y="270" font-family="monospace" font-size="9" fill="url(#heroGradient3)">SELECT *</text>
+    <text x="460" y="280" font-family="monospace" font-size="9" fill="url(#heroGradient3)">FROM users</text>
+  </g>
+  
+  <!-- Cloud Icons -->
+  <g transform="translate(120, 150)">
+    <path d="M0 20c-3 0-5.5-2.5-5.5-5.5s2.5-5.5 5.5-5.5c0.8-3.3 3.8-5.8 7.4-5.8s6.6 2.5 7.4 5.8c3 0 5.5 2.5 5.5 5.5s-2.5 5.5-5.5 5.5H0z" fill="url(#heroGradient1)" opacity="0.7"/>
+  </g>
+  
+  <g transform="translate(420, 180)">
+    <path d="M0 15c-2.2 0-4-1.8-4-4s1.8-4 4-4c0.6-2.4 2.8-4.2 5.4-4.2s4.8 1.8 5.4 4.2c2.2 0 4 1.8 4 4s-1.8 4-4 4H0z" fill="url(#heroGradient2)" opacity="0.7"/>
+  </g>
+  
+  <!-- Network Connections -->
+  <g stroke="url(#heroGradient1)" stroke-width="2" fill="none" opacity="0.4">
+    <line x1="300" y1="180" x2="450" y2="140"/>
+    <line x1="200" y1="200" x2="120" y2="100"/>
+    <line x1="400" y1="240" x2="470" y2="270"/>
+  </g>
+  
+  <!-- Connection Nodes -->
+  <circle cx="300" cy="180" r="4" fill="url(#heroGradient1)"/>
+  <circle cx="450" cy="140" r="4" fill="url(#heroGradient1)"/>
+  <circle cx="200" cy="200" r="4" fill="url(#heroGradient2)"/>
+  <circle cx="120" cy="100" r="4" fill="url(#heroGradient2)"/>
+  <circle cx="400" cy="240" r="4" fill="url(#heroGradient3)"/>
+  <circle cx="470" cy="270" r="4" fill="url(#heroGradient3)"/>
+  
+  <!-- Animated Elements -->
+  <g>
+    <circle cx="50" cy="50" r="3" fill="url(#heroGradient1)" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="550" cy="80" r="2" fill="url(#heroGradient2)" opacity="0.5">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="80" cy="350" r="2.5" fill="url(#heroGradient3)" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="520" cy="320" r="2" fill="url(#heroGradient1)" opacity="0.4">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

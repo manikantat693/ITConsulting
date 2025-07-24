@@ -23,6 +23,22 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="assets/images/logo.svg" alt="CloudFlexIT Logo">
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+            <p class="loading-text">Launching Your Future...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
     <!-- Header -->
     <header class="header" id="header">
         <nav class="navbar">
@@ -65,6 +81,9 @@
                 </div>
                 
                 <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
                     <a href="#contact" class="btn btn-primary">Get Started</a>
                     <button class="nav-toggle" id="nav-toggle">
                         <span></span>
@@ -76,38 +95,43 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Enhanced Interactivity -->
     <section class="hero" id="home">
         <div class="hero-background">
             <div class="hero-particles"></div>
+            <div class="geometric-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
         </div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text" data-aos="fade-up">
                     <h1 class="hero-title">
                         Empowering Careers,
-                        <span class="gradient-text">Transforming Technology</span>
+                        <span class="gradient-text typing-text">Transforming Technology</span>
                     </h1>
                     <p class="hero-subtitle">
                         Premier IT consulting and W2 staffing solutions with comprehensive visa sponsorship. 
                         We bridge the gap between exceptional talent and innovative opportunities.
                     </p>
                     <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">500+</span>
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                            <span class="stat-number" data-target="500">0</span>
                             <span class="stat-label">Professionals Placed</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">98%</span>
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                            <span class="stat-number" data-target="98">0</span>
                             <span class="stat-label">Success Rate</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">50+</span>
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                            <span class="stat-number" data-target="50">0</span>
                             <span class="stat-label">Enterprise Clients</span>
                         </div>
                     </div>
-                    <div class="hero-actions">
-                        <a href="#contact" class="btn btn-primary btn-large">
+                    <div class="hero-actions" data-aos="fade-up" data-aos-delay="400">
+                        <a href="#contact" class="btn btn-primary btn-large pulse-animation">
                             <i class="fas fa-rocket"></i>
                             Start Your Journey
                         </a>
@@ -133,15 +157,27 @@
                                 <i class="fas fa-shield-alt"></i>
                                 <span>Secure & Reliable</span>
                             </div>
+                            <div class="floating-card card-4">
+                                <i class="fas fa-code"></i>
+                                <span>Innovation</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Interactive Scroll Indicator -->
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="800">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <p>Scroll to explore</p>
+        </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
+    <!-- About Section with Enhanced Animations -->
+    <section class="about animate-on-scroll" id="about">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">About CloudFlexIT</span>
@@ -153,28 +189,31 @@
             
             <div class="about-content">
                 <div class="about-features">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card interactive-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="feature-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
                         <h3>W2 Employment Model</h3>
                         <p>We hire talented professionals directly on our W2 payroll, providing stability, benefits, and career growth opportunities.</p>
+                        <div class="card-hover-effect"></div>
                     </div>
                     
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card interactive-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="feature-icon">
                             <i class="fas fa-globe-americas"></i>
                         </div>
                         <h3>Visa Sponsorship</h3>
                         <p>Comprehensive immigration support including H1B, Green Card sponsorship, and legal assistance throughout the process.</p>
+                        <div class="card-hover-effect"></div>
                     </div>
                     
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card interactive-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="feature-icon">
                             <i class="fas fa-bullhorn"></i>
                         </div>
                         <h3>Professional Marketing</h3>
                         <p>We handle your professional branding, resume optimization, and market positioning to maximize opportunities.</p>
+                        <div class="card-hover-effect"></div>
                     </div>
                 </div>
                 
@@ -225,8 +264,8 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
+    <!-- Services Section with Interactive Cards -->
+    <section class="services animate-on-scroll" id="services">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Our Services</span>
@@ -237,7 +276,7 @@
             </div>
             
             <div class="services-grid">
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card interactive-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="service-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
@@ -249,9 +288,10 @@
                         <li><i class="fas fa-check"></i> Technology Roadmap</li>
                     </ul>
                     <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
                 </div>
                 
-                <div class="service-card featured" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card featured interactive-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-badge">Most Popular</div>
                     <div class="service-icon">
                         <i class="fas fa-users"></i>
@@ -264,9 +304,10 @@
                         <li><i class="fas fa-check"></i> Competitive Salaries</li>
                     </ul>
                     <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
                 </div>
                 
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-card interactive-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-icon">
                         <i class="fas fa-passport"></i>
                     </div>
@@ -278,9 +319,10 @@
                         <li><i class="fas fa-check"></i> Legal Assistance</li>
                     </ul>
                     <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
                 </div>
                 
-                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-card interactive-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="service-icon">
                         <i class="fas fa-cloud"></i>
                     </div>
@@ -292,9 +334,10 @@
                         <li><i class="fas fa-check"></i> Cloud Security</li>
                     </ul>
                     <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
                 </div>
                 
-                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="service-card interactive-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="service-icon">
                         <i class="fas fa-rocket"></i>
                     </div>
@@ -306,9 +349,10 @@
                         <li><i class="fas fa-check"></i> AI/ML Integration</li>
                     </ul>
                     <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
                 </div>
                 
-                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="service-card interactive-card" data-aos="fade-up" data-aos-delay="600">
                     <div class="service-icon">
                         <i class="fas fa-bullhorn"></i>
                     </div>
@@ -320,13 +364,14 @@
                         <li><i class="fas fa-check"></i> Interview Coaching</li>
                     </ul>
                     <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Industries Section -->
-    <section class="industries" id="industries">
+    <section class="industries animate-on-scroll" id="industries">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Industries We Serve</span>
@@ -337,59 +382,65 @@
             </div>
             
             <div class="industries-grid">
-                <div class="industry-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="industry-icon">
                         <i class="fas fa-hospital"></i>
                     </div>
                     <h3>Healthcare</h3>
                     <p>HIPAA-compliant solutions, EHR systems, and healthcare technology consulting.</p>
+                    <div class="card-hover-effect"></div>
                 </div>
                 
-                <div class="industry-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="industry-icon">
                         <i class="fas fa-university"></i>
                     </div>
                     <h3>Financial Services</h3>
                     <p>Secure banking solutions, fintech development, and regulatory compliance systems.</p>
+                    <div class="card-hover-effect"></div>
                 </div>
                 
-                <div class="industry-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="industry-icon">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
                     <h3>E-commerce</h3>
                     <p>Scalable e-commerce platforms, payment integration, and digital marketing solutions.</p>
+                    <div class="card-hover-effect"></div>
                 </div>
                 
-                <div class="industry-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="industry-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3>Education</h3>
                     <p>Learning management systems, educational technology, and digital classroom solutions.</p>
+                    <div class="card-hover-effect"></div>
                 </div>
                 
-                <div class="industry-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="industry-icon">
                         <i class="fas fa-industry"></i>
                     </div>
                     <h3>Manufacturing</h3>
                     <p>Industrial IoT, automation systems, and supply chain management solutions.</p>
+                    <div class="card-hover-effect"></div>
                 </div>
                 
-                <div class="industry-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="600">
                     <div class="industry-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <h3>Technology</h3>
                     <p>Software development, mobile applications, and emerging technology solutions.</p>
+                    <div class="card-hover-effect"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Process Section -->
-    <section class="process">
+    <!-- Process Section with Interactive Timeline -->
+    <section class="process animate-on-scroll">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Our Process</span>
@@ -404,9 +455,10 @@
                     <div class="timeline-icon">
                         <span class="step-number">01</span>
                     </div>
-                    <div class="timeline-content">
+                    <div class="timeline-content interactive-card">
                         <h3>Initial Consultation</h3>
                         <p>We begin with a comprehensive assessment of your skills, experience, and career goals to create a personalized strategy.</p>
+                        <div class="card-hover-effect"></div>
                     </div>
                 </div>
                 
@@ -414,9 +466,10 @@
                     <div class="timeline-icon">
                         <span class="step-number">02</span>
                     </div>
-                    <div class="timeline-content">
+                    <div class="timeline-content interactive-card">
                         <h3>Profile Enhancement</h3>
                         <p>Our marketing team optimizes your professional profile, resume, and online presence to attract top employers.</p>
+                        <div class="card-hover-effect"></div>
                     </div>
                 </div>
                 
@@ -424,9 +477,10 @@
                     <div class="timeline-icon">
                         <span class="step-number">03</span>
                     </div>
-                    <div class="timeline-content">
+                    <div class="timeline-content interactive-card">
                         <h3>Opportunity Matching</h3>
                         <p>We leverage our extensive network to identify and match you with opportunities that align with your career objectives.</p>
+                        <div class="card-hover-effect"></div>
                     </div>
                 </div>
                 
@@ -434,9 +488,10 @@
                     <div class="timeline-icon">
                         <span class="step-number">04</span>
                     </div>
-                    <div class="timeline-content">
+                    <div class="timeline-content interactive-card">
                         <h3>Interview Support</h3>
                         <p>Comprehensive interview preparation, coaching, and support to ensure you present your best self to potential employers.</p>
+                        <div class="card-hover-effect"></div>
                     </div>
                 </div>
                 
@@ -444,9 +499,10 @@
                     <div class="timeline-icon">
                         <span class="step-number">05</span>
                     </div>
-                    <div class="timeline-content">
+                    <div class="timeline-content interactive-card">
                         <h3>W2 Onboarding</h3>
                         <p>Seamless onboarding process with full W2 benefits, including health insurance, 401k, and professional development support.</p>
+                        <div class="card-hover-effect"></div>
                     </div>
                 </div>
                 
@@ -454,9 +510,10 @@
                     <div class="timeline-icon">
                         <span class="step-number">06</span>
                     </div>
-                    <div class="timeline-content">
+                    <div class="timeline-content interactive-card">
                         <h3>Visa Processing</h3>
                         <p>Complete immigration support including petition filing, documentation, and legal assistance throughout the visa process.</p>
+                        <div class="card-hover-effect"></div>
                     </div>
                 </div>
             </div>
@@ -464,7 +521,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials">
+    <section class="testimonials animate-on-scroll">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Client Success Stories</span>
@@ -485,7 +542,7 @@
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <img src="assets/images/testimonial-1.jpg" alt="Raj Patel">
+                                <div class="avatar-placeholder">RP</div>
                             </div>
                             <div class="author-info">
                                 <h4>Raj Patel</h4>
@@ -512,7 +569,7 @@
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <img src="assets/images/testimonial-2.jpg" alt="Maria Rodriguez">
+                                <div class="avatar-placeholder">MR</div>
                             </div>
                             <div class="author-info">
                                 <h4>Maria Rodriguez</h4>
@@ -539,7 +596,7 @@
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <img src="assets/images/testimonial-3.jpg" alt="David Chen">
+                                <div class="avatar-placeholder">DC</div>
                             </div>
                             <div class="author-info">
                                 <h4>David Chen</h4>
@@ -574,7 +631,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta">
+    <section class="cta animate-on-scroll">
         <div class="container">
             <div class="cta-content" data-aos="fade-up">
                 <h2 class="cta-title">Ready to Transform Your Career?</h2>
@@ -583,7 +640,7 @@
                     Let us help you achieve your professional goals with our comprehensive W2 staffing and visa sponsorship services.
                 </p>
                 <div class="cta-actions">
-                    <a href="#contact" class="btn btn-primary btn-large">
+                    <a href="#contact" class="btn btn-primary btn-large pulse-animation">
                         <i class="fas fa-rocket"></i>
                         Get Started Today
                     </a>
@@ -611,7 +668,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <section class="contact animate-on-scroll" id="contact">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-tag">Get In Touch</span>
@@ -623,7 +680,7 @@
             
             <div class="contact-content">
                 <div class="contact-info" data-aos="fade-right">
-                    <div class="contact-card">
+                    <div class="contact-card interactive-card">
                         <div class="contact-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
@@ -631,9 +688,10 @@
                             <h3>Our Office</h3>
                             <p>123 Business Center Drive<br>Suite 500<br>New York, NY 10001</p>
                         </div>
+                        <div class="card-hover-effect"></div>
                     </div>
                     
-                    <div class="contact-card">
+                    <div class="contact-card interactive-card">
                         <div class="contact-icon">
                             <i class="fas fa-phone"></i>
                         </div>
@@ -642,9 +700,10 @@
                             <p><a href="tel:+1-555-123-4567">+1 (555) 123-4567</a></p>
                             <p><a href="tel:+1-555-123-4568">+1 (555) 123-4568</a></p>
                         </div>
+                        <div class="card-hover-effect"></div>
                     </div>
                     
-                    <div class="contact-card">
+                    <div class="contact-card interactive-card">
                         <div class="contact-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
@@ -653,9 +712,10 @@
                             <p><a href="mailto:info@cloudflexit.com">info@cloudflexit.com</a></p>
                             <p><a href="mailto:careers@cloudflexit.com">careers@cloudflexit.com</a></p>
                         </div>
+                        <div class="card-hover-effect"></div>
                     </div>
                     
-                    <div class="contact-card">
+                    <div class="contact-card interactive-card">
                         <div class="contact-icon">
                             <i class="fas fa-clock"></i>
                         </div>
@@ -663,6 +723,7 @@
                             <h3>Business Hours</h3>
                             <p>Monday - Friday: 9:00 AM - 6:00 PM EST<br>Saturday: 10:00 AM - 2:00 PM EST<br>Sunday: Closed</p>
                         </div>
+                        <div class="card-hover-effect"></div>
                     </div>
                 </div>
                 
@@ -727,7 +788,7 @@
                 <div class="footer-section">
                     <div class="footer-brand">
                         <a href="#home" class="footer-logo">
-                            <img src="assets/images/logo-white.svg" alt="CloudFlexIT Logo">
+                            <img src="assets/images/logo.svg" alt="CloudFlexIT Logo">
                             <span>CloudFlexIT</span>
                         </a>
                         <p class="footer-description">
