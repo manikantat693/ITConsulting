@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Cloud Shape -->
+  <path d="M15 35c-5.5 0-10-4.5-10-10 0-5.5 4.5-10 10-10 1.5-6 7-10.5 13.5-10.5S40 8.5 42 14.5c1-.5 2-.5 3-.5 4 0 7.5 3.5 7.5 7.5s-3.5 7.5-7.5 7.5H15z" fill="url(#logoGradient)" opacity="0.8"/>
+  
+  <!-- Circuit Pattern -->
+  <g stroke="url(#logoGradient)" stroke-width="2" fill="none" opacity="0.6">
+    <circle cx="20" cy="25" r="3"/>
+    <circle cx="35" cy="20" r="2"/>
+    <circle cx="40" cy="30" r="2.5"/>
+    <line x1="23" y1="25" x2="33" y2="20"/>
+    <line x1="37" y1="20" x2="38" y2="28"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="60" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="url(#logoGradient)">
+    CloudFlexIT
+  </text>
+  <text x="60" y="45" font-family="Arial, sans-serif" font-size="8" fill="#666">
+    Empowering Technology Careers
+  </text>
+</svg>

@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudFlexIT - Premier IT Consulting & W2 Staffing Solutions</title>
+    <meta name="description" content="CloudFlexIT provides expert IT consulting, W2 staffing solutions, and visa sponsorship services. We help talented professionals build successful careers in technology.">
+    <meta name="keywords" content="IT consulting, W2 staffing, visa sponsorship, technology consulting, IT recruitment, software development, cloud solutions">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="assets/images/logo.svg" alt="CloudFlexIT Logo">
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+            <p class="loading-text">Launching Your Future...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="#home" class="logo">
+                        <img src="assets/images/logo.svg" alt="CloudFlexIT Logo" class="logo-img">
+                        <span class="logo-text">CloudFlexIT</span>
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#home" class="nav-link active">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#about" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#services" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#services">IT Consulting</a></li>
+                                <li><a href="#services">W2 Staffing</a></li>
+                                <li><a href="#services">Visa Sponsorship</a></li>
+                                <li><a href="#services">Cloud Solutions</a></li>
+                                <li><a href="#services">Digital Transformation</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#industries" class="nav-link">Industries</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#careers" class="nav-link">Careers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#contact" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="#contact" class="btn btn-primary">Get Started</a>
+                    <button class="nav-toggle" id="nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Enhanced Interactivity -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="hero-particles"></div>
+            <div class="geometric-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-up">
+                    <h1 class="hero-title">
+                        Empowering Careers,
+                        <span class="gradient-text typing-text">Transforming Technology</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Premier IT consulting and W2 staffing solutions with comprehensive visa sponsorship. 
+                        We bridge the gap between exceptional talent and innovative opportunities.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                            <span class="stat-number" data-target="500">0</span>
+                            <span class="stat-label">Professionals Placed</span>
+                        </div>
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                            <span class="stat-number" data-target="98">0</span>
+                            <span class="stat-label">Success Rate</span>
+                        </div>
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                            <span class="stat-number" data-target="50">0</span>
+                            <span class="stat-label">Enterprise Clients</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions" data-aos="fade-up" data-aos-delay="400">
+                        <a href="#contact" class="btn btn-primary btn-large pulse-animation">
+                            <i class="fas fa-rocket"></i>
+                            Start Your Journey
+                        </a>
+                        <a href="#about" class="btn btn-outline btn-large">
+                            <i class="fas fa-play"></i>
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual" data-aos="fade-left" data-aos-delay="200">
+                    <div class="hero-image-container">
+                        <img src="assets/images/hero-illustration.svg" alt="IT Consulting Illustration" class="hero-image">
+                        <div class="floating-elements">
+                            <div class="floating-card card-1">
+                                <i class="fab fa-aws"></i>
+                                <span>Cloud Solutions</span>
+                            </div>
+                            <div class="floating-card card-2">
+                                <i class="fas fa-users"></i>
+                                <span>Expert Team</span>
+                            </div>
+                            <div class="floating-card card-3">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Secure & Reliable</span>
+                            </div>
+                            <div class="floating-card card-4">
+                                <i class="fas fa-code"></i>
+                                <span>Innovation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Scroll Indicator -->
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="800">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <p>Scroll to explore</p>
+        </div>
+    </section>
+
+    <!-- About Section with Enhanced Animations -->
+    <section class="about animate-on-scroll" id="about">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">About CloudFlexIT</span>
+                <h2 class="section-title">Your Trusted Partner in Technology Excellence</h2>
+                <p class="section-subtitle">
+                    We specialize in connecting exceptional IT professionals with leading companies through our comprehensive W2 staffing model, complete visa sponsorship support, and innovative marketing strategies.
+                </p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-features">
+                    <div class="feature-card interactive-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>W2 Employment Model</h3>
+                        <p>We hire talented professionals directly on our W2 payroll, providing stability, benefits, and career growth opportunities.</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                    
+                    <div class="feature-card interactive-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3>Visa Sponsorship</h3>
+                        <p>Comprehensive immigration support including H1B, Green Card sponsorship, and legal assistance throughout the process.</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                    
+                    <div class="feature-card interactive-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3>Professional Marketing</h3>
+                        <p>We handle your professional branding, resume optimization, and market positioning to maximize opportunities.</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="about-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" data-target="10">0</span>
+                                <span class="stat-text">Years Experience</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users-cog"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" data-target="500">0</span>
+                                <span class="stat-text">Professionals Placed</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" data-target="50">0</span>
+                                <span class="stat-text">Enterprise Clients</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-passport"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" data-target="95">0</span>
+                                <span class="stat-text">% Visa Success Rate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section with Interactive Cards -->
+    <section class="services animate-on-scroll" id="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Our Services</span>
+                <h2 class="section-title">Comprehensive IT Solutions & Staffing Services</h2>
+                <p class="section-subtitle">
+                    From strategic consulting to talent acquisition, we provide end-to-end solutions that drive business success and career growth.
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card interactive-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>IT Consulting</h3>
+                    <p>Strategic technology consulting to optimize your business processes and drive digital transformation initiatives.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Digital Strategy</li>
+                        <li><i class="fas fa-check"></i> System Architecture</li>
+                        <li><i class="fas fa-check"></i> Technology Roadmap</li>
+                    </ul>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
+                </div>
+                
+                <div class="service-card featured interactive-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-badge">Most Popular</div>
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>W2 Staffing Solutions</h3>
+                    <p>Direct hire W2 employment with full benefits, providing stability and growth opportunities for IT professionals.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Full Benefits Package</li>
+                        <li><i class="fas fa-check"></i> Career Development</li>
+                        <li><i class="fas fa-check"></i> Competitive Salaries</li>
+                    </ul>
+                    <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
+                </div>
+                
+                <div class="service-card interactive-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <h3>Visa Sponsorship</h3>
+                    <p>Complete immigration support including H1B petitions, Green Card processing, and legal consultation services.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> H1B Processing</li>
+                        <li><i class="fas fa-check"></i> Green Card Support</li>
+                        <li><i class="fas fa-check"></i> Legal Assistance</li>
+                    </ul>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
+                </div>
+                
+                <div class="service-card interactive-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Comprehensive cloud migration, optimization, and management services across all major platforms.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> AWS/Azure/GCP</li>
+                        <li><i class="fas fa-check"></i> Migration Services</li>
+                        <li><i class="fas fa-check"></i> Cloud Security</li>
+                    </ul>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
+                </div>
+                
+                <div class="service-card interactive-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Digital Transformation</h3>
+                    <p>End-to-end digital transformation services to modernize your business and improve operational efficiency.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Process Automation</li>
+                        <li><i class="fas fa-check"></i> Data Analytics</li>
+                        <li><i class="fas fa-check"></i> AI/ML Integration</li>
+                    </ul>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
+                </div>
+                
+                <div class="service-card interactive-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Professional Marketing</h3>
+                    <p>Personal branding and marketing services to enhance your professional visibility and career prospects.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Resume Optimization</li>
+                        <li><i class="fas fa-check"></i> LinkedIn Branding</li>
+                        <li><i class="fas fa-check"></i> Interview Coaching</li>
+                    </ul>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <div class="card-hover-effect"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="industries animate-on-scroll" id="industries">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Industries We Serve</span>
+                <h2 class="section-title">Expertise Across Multiple Sectors</h2>
+                <p class="section-subtitle">
+                    Our deep industry knowledge and technical expertise enable us to deliver tailored solutions across various business sectors.
+                </p>
+            </div>
+            
+            <div class="industries-grid">
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="industry-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h3>Healthcare</h3>
+                    <p>HIPAA-compliant solutions, EHR systems, and healthcare technology consulting.</p>
+                    <div class="card-hover-effect"></div>
+                </div>
+                
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="industry-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Financial Services</h3>
+                    <p>Secure banking solutions, fintech development, and regulatory compliance systems.</p>
+                    <div class="card-hover-effect"></div>
+                </div>
+                
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="industry-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>E-commerce</h3>
+                    <p>Scalable e-commerce platforms, payment integration, and digital marketing solutions.</p>
+                    <div class="card-hover-effect"></div>
+                </div>
+                
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="industry-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Education</h3>
+                    <p>Learning management systems, educational technology, and digital classroom solutions.</p>
+                    <div class="card-hover-effect"></div>
+                </div>
+                
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="industry-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3>Manufacturing</h3>
+                    <p>Industrial IoT, automation systems, and supply chain management solutions.</p>
+                    <div class="card-hover-effect"></div>
+                </div>
+                
+                <div class="industry-card interactive-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="industry-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Technology</h3>
+                    <p>Software development, mobile applications, and emerging technology solutions.</p>
+                    <div class="card-hover-effect"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section with Interactive Timeline -->
+    <section class="process animate-on-scroll">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Our Process</span>
+                <h2 class="section-title">How We Make It Happen</h2>
+                <p class="section-subtitle">
+                    Our streamlined process ensures successful placements and smooth career transitions for IT professionals.
+                </p>
+            </div>
+            
+            <div class="process-timeline">
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+                    <div class="timeline-icon">
+                        <span class="step-number">01</span>
+                    </div>
+                    <div class="timeline-content interactive-card">
+                        <h3>Initial Consultation</h3>
+                        <p>We begin with a comprehensive assessment of your skills, experience, and career goals to create a personalized strategy.</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                    <div class="timeline-icon">
+                        <span class="step-number">02</span>
+                    </div>
+                    <div class="timeline-content interactive-card">
+                        <h3>Profile Enhancement</h3>
+                        <p>Our marketing team optimizes your professional profile, resume, and online presence to attract top employers.</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="300">
+                    <div class="timeline-icon">
+                        <span class="step-number">03</span>
+                    </div>
+                    <div class="timeline-content interactive-card">
+                        <h3>Opportunity Matching</h3>
+                        <p>We leverage our extensive network to identify and match you with opportunities that align with your career objectives.</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
+                    <div class="timeline-icon">
+                        <span class="step-number">04</span>
+                    </div>
+                    <div class="timeline-content interactive-card">
+                        <h3>Interview Support</h3>
+                        <p>Comprehensive interview preparation, coaching, and support to ensure you present your best self to potential employers.</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="500">
+                    <div class="timeline-icon">
+                        <span class="step-number">05</span>
+                    </div>
+                    <div class="timeline-content interactive-card">
+                        <h3>W2 Onboarding</h3>
+                        <p>Seamless onboarding process with full W2 benefits, including health insurance, 401k, and professional development support.</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="600">
+                    <div class="timeline-icon">
+                        <span class="step-number">06</span>
+                    </div>
+                    <div class="timeline-content interactive-card">
+                        <h3>Visa Processing</h3>
+                        <p>Complete immigration support including petition filing, documentation, and legal assistance throughout the visa process.</p>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials animate-on-scroll">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Client Success Stories</span>
+                <h2 class="section-title">What Our Professionals Say</h2>
+                <p class="section-subtitle">
+                    Hear from the talented professionals who have transformed their careers with CloudFlexIT.
+                </p>
+            </div>
+            
+            <div class="testimonials-slider" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card active">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "CloudFlexIT transformed my career completely. Their W2 model provided the stability I needed, and their visa sponsorship support made my American dream a reality. The team is incredibly professional and supportive throughout the entire process."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <div class="avatar-placeholder">RP</div>
+                            </div>
+                            <div class="author-info">
+                                <h4>Raj Patel</h4>
+                                <span>Senior Software Engineer</span>
+                                <div class="author-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "The marketing support from CloudFlexIT was exceptional. They completely revamped my LinkedIn profile and resume, which led to multiple interview opportunities. I'm now working at a Fortune 500 company with excellent benefits."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <div class="avatar-placeholder">MR</div>
+                            </div>
+                            <div class="author-info">
+                                <h4>Maria Rodriguez</h4>
+                                <span>Cloud Solutions Architect</span>
+                                <div class="author-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Working with CloudFlexIT has been a game-changer. Their comprehensive approach to career development, combined with their expertise in visa processing, made my transition to the US seamless. Highly recommended!"
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <div class="avatar-placeholder">DC</div>
+                            </div>
+                            <div class="author-info">
+                                <h4>David Chen</h4>
+                                <span>DevOps Engineer</span>
+                                <div class="author-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-navigation">
+                <button class="nav-btn prev-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="testimonial-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                </div>
+                <button class="nav-btn next-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta animate-on-scroll">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h2 class="cta-title">Ready to Transform Your Career?</h2>
+                <p class="cta-subtitle">
+                    Join hundreds of successful IT professionals who have built thriving careers with CloudFlexIT. 
+                    Let us help you achieve your professional goals with our comprehensive W2 staffing and visa sponsorship services.
+                </p>
+                <div class="cta-actions">
+                    <a href="#contact" class="btn btn-primary btn-large pulse-animation">
+                        <i class="fas fa-rocket"></i>
+                        Get Started Today
+                    </a>
+                    <a href="tel:+1-555-123-4567" class="btn btn-outline btn-large">
+                        <i class="fas fa-phone"></i>
+                        Call Now
+                    </a>
+                </div>
+                <div class="cta-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Free Consultation</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>No Upfront Costs</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Guaranteed Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact animate-on-scroll" id="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Get In Touch</span>
+                <h2 class="section-title">Let's Start Your Success Story</h2>
+                <p class="section-subtitle">
+                    Ready to take the next step in your career? Contact us today for a free consultation and discover how we can help you achieve your professional goals.
+                </p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-card interactive-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Our Office</h3>
+                            <p>123 Business Center Drive<br>Suite 500<br>New York, NY 10001</p>
+                        </div>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                    
+                    <div class="contact-card interactive-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p><a href="tel:+1-555-123-4567">+1 (555) 123-4567</a></p>
+                            <p><a href="tel:+1-555-123-4568">+1 (555) 123-4568</a></p>
+                        </div>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                    
+                    <div class="contact-card interactive-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p><a href="mailto:info@cloudflexit.com">info@cloudflexit.com</a></p>
+                            <p><a href="mailto:careers@cloudflexit.com">careers@cloudflexit.com</a></p>
+                        </div>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                    
+                    <div class="contact-card interactive-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Business Hours</h3>
+                            <p>Monday - Friday: 9:00 AM - 6:00 PM EST<br>Saturday: 10:00 AM - 2:00 PM EST<br>Sunday: Closed</p>
+                        </div>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container" data-aos="fade-left">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Service Interest</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="w2-staffing">W2 Staffing</option>
+                                <option value="visa-sponsorship">Visa Sponsorship</option>
+                                <option value="it-consulting">IT Consulting</option>
+                                <option value="cloud-solutions">Cloud Solutions</option>
+                                <option value="digital-transformation">Digital Transformation</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your background, career goals, or how we can help you..."></textarea>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="newsletter" id="newsletter">
+                                <span class="checkmark"></span>
+                                Subscribe to our newsletter for career tips and opportunities
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <a href="#home" class="footer-logo">
+                            <img src="assets/images/logo.svg" alt="CloudFlexIT Logo">
+                            <span>CloudFlexIT</span>
+                        </a>
+                        <p class="footer-description">
+                            Empowering IT professionals with comprehensive W2 staffing solutions, visa sponsorship, and career development services.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">IT Consulting</a></li>
+                        <li><a href="#services">W2 Staffing</a></li>
+                        <li><a href="#services">Visa Sponsorship</a></li>
+                        <li><a href="#services">Cloud Solutions</a></li>
+                        <li><a href="#services">Digital Transformation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Industries</h3>
+                    <ul class="footer-links">
+                        <li><a href="#industries">Healthcare</a></li>
+                        <li><a href="#industries">Financial Services</a></li>
+                        <li><a href="#industries">E-commerce</a></li>
+                        <li><a href="#industries">Education</a></li>
+                        <li><a href="#industries">Manufacturing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Business Center Drive<br>Suite 500, New York, NY 10001</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+1-555-123-4567">+1 (555) 123-4567</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:info@cloudflexit.com">info@cloudflexit.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">
+                        &copy; 2024 CloudFlexIT. All rights reserved. | Designed with <i class="fas fa-heart"></i> for success
+                    </p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
