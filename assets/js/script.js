@@ -39,6 +39,13 @@
         initFloatingCards();
         initMorphingBlobs();
         initDynamicBackground();
+        initChatWidget();
+        initJobsPortal();
+        initResourcesSection();
+        initLanguageSelector();
+        initLiveNotifications();
+        initCaseStudiesSlider();
+        initPWA();
         
         // Mark as loaded
         isLoaded = true;
@@ -830,6 +837,604 @@
         animateCounter,
         updateActiveLink
     };
+
+    // Chat Widget Functionality
+    function initChatWidget() {
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatWindow = document.getElementById('chat-window');
+        const chatClose = document.getElementById('chat-close');
+        const chatInput = document.getElementById('chat-input-field');
+        const chatSend = document.getElementById('chat-send');
+        const chatMessages = document.getElementById('chat-messages');
+
+        if (!chatToggle || !chatWindow) return;
+
+        // Toggle chat window
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.toggle('active');
+            if (chatWindow.classList.contains('active')) {
+                chatInput.focus();
+            }
+        });
+
+        // Close chat window
+        if (chatClose) {
+            chatClose.addEventListener('click', () => {
+                chatWindow.classList.remove('active');
+            });
+        }
+
+        // Send message
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            chatInput.value = '';
+
+            // Simulate bot response
+            setTimeout(() => {
+                const responses = [
+                    "Thank you for your message! A member of our team will get back to you shortly.",
+                    "I'd be happy to help you with information about our W2 staffing services.",
+                    "For visa sponsorship questions, I can connect you with our immigration specialist.",
+                    "Would you like to schedule a free consultation to discuss your career goals?"
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addMessage(randomResponse, 'bot');
+            }, 1000);
+        }
+
+        // Add message to chat
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.innerHTML = `
+                <div class="message-avatar">
+                    <i class="fas fa-${sender === 'user' ? 'user' : 'robot'}"></i>
+                </div>
+                <div class="message-content">
+                    <p>${text}</p>
+                </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Send message events
+        if (chatSend) {
+            chatSend.addEventListener('click', sendMessage);
+        }
+        
+        if (chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        }
+    }
+
+    // Jobs Portal Functionality
+    function initJobsPortal() {
+        const locationFilter = document.getElementById('location-filter');
+        const skillFilter = document.getElementById('skill-filter');
+        const visaFilter = document.getElementById('visa-filter');
+        const salaryMin = document.getElementById('salary-min');
+        const salaryMax = document.getElementById('salary-max');
+        const jobsGrid = document.getElementById('jobs-grid');
+        const uploadResumeBtn = document.getElementById('upload-resume-btn');
+
+        if (!jobsGrid) return;
+
+        // Filter jobs
+        function filterJobs() {
+            const jobCards = jobsGrid.querySelectorAll('.job-card');
+            const filters = {
+                location: locationFilter?.value || '',
+                skill: skillFilter?.value || '',
+                visa: visaFilter?.value || '',
+                salaryMin: parseInt(salaryMin?.value) || 0,
+                salaryMax: parseInt(salaryMax?.value) || Infinity
+            };
+
+            jobCards.forEach(card => {
+                const location = card.dataset.location || '';
+                const skill = card.dataset.skill || '';
+                const visa = card.dataset.visa || '';
+                const salary = parseInt(card.dataset.salary) || 0;
+
+                const matches = 
+                    (filters.location === '' || location.includes(filters.location)) &&
+                    (filters.skill === '' || skill.includes(filters.skill)) &&
+                    (filters.visa === '' || visa.includes(filters.visa)) &&
+                    salary >= filters.salaryMin &&
+                    salary <= filters.salaryMax;
+
+                card.style.display = matches ? 'block' : 'none';
+            });
+        }
+
+        // Add filter event listeners
+        [locationFilter, skillFilter, visaFilter, salaryMin, salaryMax].forEach(filter => {
+            if (filter) {
+                filter.addEventListener('change', filterJobs);
+                filter.addEventListener('input', filterJobs);
+            }
+        });
+
+        // Job application handling
+        const applyButtons = document.querySelectorAll('.btn-apply');
+        applyButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const jobId = btn.dataset.job;
+                handleJobApplication(jobId);
+            });
+        });
+
+        // Save job functionality
+        const saveButtons = document.querySelectorAll('.btn-save');
+        saveButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const jobCard = btn.closest('.job-card');
+                toggleSaveJob(jobCard, btn);
+            });
+        });
+
+        // Resume upload
+        if (uploadResumeBtn) {
+            uploadResumeBtn.addEventListener('click', () => {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.pdf,.doc,.docx';
+                input.addEventListener('change', handleResumeUpload);
+                input.click();
+            });
+        }
+    }
+
+    // Handle job application
+    function handleJobApplication(jobId) {
+        // Simulate application process
+        const modal = createModal('Job Application', `
+            <p>Thank you for your interest! We'll review your profile and get back to you within 24 hours.</p>
+            <div class="application-steps">
+                <div class="step completed">
+                    <i class="fas fa-check"></i>
+                    <span>Application Submitted</span>
+                </div>
+                <div class="step">
+                    <i class="fas fa-clock"></i>
+                    <span>Under Review</span>
+                </div>
+                <div class="step">
+                    <i class="fas fa-phone"></i>
+                    <span>Interview Scheduled</span>
+                </div>
+            </div>
+        `);
+        
+        document.body.appendChild(modal);
+        setTimeout(() => modal.remove(), 5000);
+    }
+
+    // Toggle save job
+    function toggleSaveJob(jobCard, btn) {
+        const icon = btn.querySelector('i');
+        const isSaved = icon.classList.contains('fas');
+        
+        if (isSaved) {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+            btn.innerHTML = '<i class="far fa-bookmark"></i> Save';
+        } else {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+            btn.innerHTML = '<i class="fas fa-bookmark"></i> Saved';
+        }
+    }
+
+    // Handle resume upload
+    function handleResumeUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const modal = createModal('Resume Upload', `
+                <p><strong>File:</strong> ${file.name}</p>
+                <p><strong>Size:</strong> ${(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                <p>Your resume has been uploaded successfully! We'll match you with relevant opportunities.</p>
+            `);
+            
+            document.body.appendChild(modal);
+            setTimeout(() => modal.remove(), 4000);
+        }
+    }
+
+    // Resources Section Functionality
+    function initResourcesSection() {
+        const resourceButtons = document.querySelectorAll('.resource-download');
+        
+        resourceButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const resource = btn.dataset.resource;
+                handleResourceDownload(resource, btn);
+            });
+        });
+    }
+
+    // Handle resource downloads
+    function handleResourceDownload(resource, btn) {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            // Simulate download or redirect
+            const resourceActions = {
+                'h1b-guide': () => {
+                    createModal('H1B Guide', 'Your H1B Process Guide is being prepared. Check your email for the download link!');
+                },
+                'salary-report': () => {
+                    window.open('#salary-calculator', '_blank');
+                },
+                'resume-templates': () => {
+                    createModal('Resume Templates', 'Template pack is being prepared. Download will start shortly!');
+                },
+                'interview-questions': () => {
+                    createModal('Interview Questions', 'Redirecting to our interview preparation portal...');
+                },
+                'salary-calculator': () => {
+                    openSalaryCalculator();
+                },
+                'visa-tracker': () => {
+                    openVisaTracker();
+                }
+            };
+
+            if (resourceActions[resource]) {
+                resourceActions[resource]();
+            }
+
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }, 2000);
+    }
+
+    // Language Selector
+    function initLanguageSelector() {
+        const languageSelect = document.getElementById('language-select');
+        
+        if (languageSelect) {
+            languageSelect.addEventListener('change', (e) => {
+                const selectedLang = e.target.value;
+                // In a real implementation, this would trigger translation
+                console.log(`Language changed to: ${selectedLang}`);
+                
+                // Save preference
+                localStorage.setItem('preferred-language', selectedLang);
+                
+                // Show language change notification
+                showNotification(`Language changed to ${getLanguageName(selectedLang)}`, 'success');
+            });
+
+            // Load saved language preference
+            const savedLang = localStorage.getItem('preferred-language');
+            if (savedLang) {
+                languageSelect.value = savedLang;
+            }
+        }
+    }
+
+    // Get language name
+    function getLanguageName(code) {
+        const languages = {
+            'en': 'English',
+            'es': 'Español',
+            'hi': 'हिंदी',
+            'zh': '中文'
+        };
+        return languages[code] || 'English';
+    }
+
+    // Live Notifications
+    function initLiveNotifications() {
+        const notificationContainer = document.getElementById('live-notifications');
+        if (!notificationContainer) return;
+
+        const notifications = [
+            "John D. just got placed at Microsoft with H1B sponsorship!",
+            "Sarah P. received her Green Card approval through our program!",
+            "Michael R. landed a $150K role at Google with our help!",
+            "Priya S. successfully transitioned from QA to DevOps!",
+            "Carlos M. got his H1B approved in record time!"
+        ];
+
+        let currentIndex = 0;
+
+        function updateNotification() {
+            const notificationItem = notificationContainer.querySelector('.notification-item span');
+            if (notificationItem) {
+                notificationItem.textContent = notifications[currentIndex];
+                currentIndex = (currentIndex + 1) % notifications.length;
+            }
+        }
+
+        // Update notification every 5 seconds
+        setInterval(updateNotification, 5000);
+    }
+
+    // Case Studies Slider
+    function initCaseStudiesSlider() {
+        const slider = document.querySelector('.case-studies-slider');
+        if (!slider) return;
+
+        const cards = slider.querySelectorAll('.case-study-card');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            cards.forEach((card, i) => {
+                card.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % cards.length;
+            showSlide(currentSlide);
+        }
+
+        // Auto-advance slides
+        setInterval(nextSlide, 8000);
+
+        // Manual navigation (if navigation buttons exist)
+        const prevBtn = slider.querySelector('.prev-btn');
+        const nextBtn = slider.querySelector('.next-btn');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + cards.length) % cards.length;
+                showSlide(currentSlide);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', nextSlide);
+        }
+    }
+
+    // PWA Functionality
+    function initPWA() {
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('SW registered:', registration);
+                })
+                .catch(error => {
+                    console.log('SW registration failed:', error);
+                });
+        }
+
+        // Install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showInstallPrompt();
+        });
+
+        function showInstallPrompt() {
+            const installBanner = document.createElement('div');
+            installBanner.className = 'install-banner';
+            installBanner.innerHTML = `
+                <div class="install-content">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Install CloudFlexIT app for a better experience!</span>
+                    <button class="btn btn-primary btn-sm" id="install-btn">Install</button>
+                    <button class="btn btn-outline btn-sm" id="dismiss-btn">Dismiss</button>
+                </div>
+            `;
+
+            document.body.appendChild(installBanner);
+
+            // Handle install
+            document.getElementById('install-btn').addEventListener('click', () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        deferredPrompt = null;
+                        installBanner.remove();
+                    });
+                }
+            });
+
+            // Handle dismiss
+            document.getElementById('dismiss-btn').addEventListener('click', () => {
+                installBanner.remove();
+            });
+        }
+    }
+
+    // Utility Functions
+    function createModal(title, content) {
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>${title}</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    ${content}
+                </div>
+            </div>
+        `;
+
+        modal.querySelector('.modal-close').addEventListener('click', () => {
+            modal.remove();
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+        });
+
+        return modal;
+    }
+
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+            <button class="notification-close">&times;</button>
+        `;
+
+        document.body.appendChild(notification);
+
+        // Auto remove after 5 seconds
+        setTimeout(() => notification.remove(), 5000);
+
+        // Manual close
+        notification.querySelector('.notification-close').addEventListener('click', () => {
+            notification.remove();
+        });
+    }
+
+    function openSalaryCalculator() {
+        const calculator = createModal('Salary Calculator', `
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>Experience Level:</label>
+                    <select id="exp-level">
+                        <option value="junior">Junior (0-2 years)</option>
+                        <option value="mid">Mid-level (3-5 years)</option>
+                        <option value="senior">Senior (6-10 years)</option>
+                        <option value="lead">Lead (10+ years)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Primary Skill:</label>
+                    <select id="primary-skill">
+                        <option value="java">Java</option>
+                        <option value="python">Python</option>
+                        <option value="react">React</option>
+                        <option value="aws">AWS</option>
+                        <option value="devops">DevOps</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Location:</label>
+                    <select id="location">
+                        <option value="ny">New York</option>
+                        <option value="ca">California</option>
+                        <option value="tx">Texas</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="calculateSalary()">Calculate Salary</button>
+                <div id="salary-result" style="margin-top: 20px;"></div>
+            </div>
+        `);
+
+        document.body.appendChild(calculator);
+
+        // Add calculate function to window for onclick
+        window.calculateSalary = function() {
+            const baseRanges = {
+                junior: [70000, 90000],
+                mid: [90000, 120000],
+                senior: [120000, 160000],
+                lead: [160000, 200000]
+            };
+
+            const skillMultipliers = {
+                java: 1.0,
+                python: 1.1,
+                react: 1.05,
+                aws: 1.15,
+                devops: 1.2
+            };
+
+            const locationMultipliers = {
+                ny: 1.3,
+                ca: 1.4,
+                tx: 1.1,
+                remote: 1.0
+            };
+
+            const exp = document.getElementById('exp-level').value;
+            const skill = document.getElementById('primary-skill').value;
+            const location = document.getElementById('location').value;
+
+            const baseRange = baseRanges[exp];
+            const skillMult = skillMultipliers[skill];
+            const locationMult = locationMultipliers[location];
+
+            const minSalary = Math.round(baseRange[0] * skillMult * locationMult);
+            const maxSalary = Math.round(baseRange[1] * skillMult * locationMult);
+
+            document.getElementById('salary-result').innerHTML = `
+                <div class="salary-result">
+                    <h4>Estimated Salary Range:</h4>
+                    <div class="salary-range">
+                        $${minSalary.toLocaleString()} - $${maxSalary.toLocaleString()}
+                    </div>
+                    <p><small>*Estimates based on current market data</small></p>
+                </div>
+            `;
+        };
+    }
+
+    function openVisaTracker() {
+        const tracker = createModal('Visa Timeline Tracker', `
+            <div class="visa-tracker">
+                <div class="tracker-steps">
+                    <div class="step completed">
+                        <div class="step-icon"><i class="fas fa-check"></i></div>
+                        <div class="step-content">
+                            <h4>Application Submitted</h4>
+                            <p>December 1, 2024</p>
+                        </div>
+                    </div>
+                    <div class="step completed">
+                        <div class="step-icon"><i class="fas fa-check"></i></div>
+                        <div class="step-content">
+                            <h4>Initial Review</h4>
+                            <p>December 15, 2024</p>
+                        </div>
+                    </div>
+                    <div class="step active">
+                        <div class="step-icon"><i class="fas fa-clock"></i></div>
+                        <div class="step-content">
+                            <h4>Background Check</h4>
+                            <p>In Progress</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-calendar"></i></div>
+                        <div class="step-content">
+                            <h4>Interview Scheduled</h4>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-award"></i></div>
+                        <div class="step-content">
+                            <h4>Approval</h4>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tracker-info">
+                    <p><strong>Estimated Timeline:</strong> 3-6 months</p>
+                    <p><strong>Next Step:</strong> Background verification completion</p>
+                </div>
+            </div>
+        `);
+
+        document.body.appendChild(tracker);
+    }
 
 })();
 

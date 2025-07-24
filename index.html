@@ -7,6 +7,10 @@
     <meta name="description" content="CloudFlexIT provides expert IT consulting, W2 staffing solutions, and visa sponsorship services. We help talented professionals build successful careers in technology.">
     <meta name="keywords" content="IT consulting, W2 staffing, visa sponsorship, technology consulting, IT recruitment, software development, cloud solutions">
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     
@@ -21,6 +25,18 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/jobs.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/resources.css">
+    
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_TRACKING_ID');
+    </script>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -33,6 +49,38 @@
                 <div class="progress-bar"></div>
             </div>
             <p class="loading-text">Launching Your Future...</p>
+        </div>
+    </div>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-toggle" id="chat-toggle">
+            <i class="fas fa-comments"></i>
+            <span class="chat-notification">1</span>
+        </div>
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <h4>Need Help? Chat with us!</h4>
+                <button class="chat-close" id="chat-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Hi! I'm here to help you with your career journey. How can I assist you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input-field" placeholder="Type your message...">
+                <button id="chat-send" class="chat-send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -72,7 +120,10 @@
                             <a href="#industries" class="nav-link">Industries</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#careers" class="nav-link">Careers</a>
+                            <a href="#jobs" class="nav-link">Jobs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#resources" class="nav-link">Resources</a>
                         </li>
                         <li class="nav-item">
                             <a href="#contact" class="nav-link">Contact</a>
@@ -81,9 +132,18 @@
                 </div>
                 
                 <div class="nav-actions">
+                    <div class="language-selector">
+                        <select id="language-select">
+                            <option value="en">EN</option>
+                            <option value="es">ES</option>
+                            <option value="hi">हिं</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </div>
                     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                         <i class="fas fa-moon"></i>
                     </button>
+                    <a href="#dashboard" class="btn btn-outline">Dashboard</a>
                     <a href="#contact" class="btn btn-primary">Get Started</a>
                     <button class="nav-toggle" id="nav-toggle">
                         <span></span>
@@ -630,6 +690,401 @@
         </div>
     </section>
 
+    <!-- Jobs Portal Section -->
+    <section class="jobs-portal animate-on-scroll" id="jobs">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Current Opportunities</span>
+                <h2 class="section-title">Find Your Dream Job</h2>
+                <p class="section-subtitle">
+                    Explore our latest job openings with W2 benefits and visa sponsorship opportunities.
+                </p>
+            </div>
+            
+            <div class="jobs-filters" data-aos="fade-up" data-aos-delay="100">
+                <div class="filter-group">
+                    <select id="location-filter" class="filter-select">
+                        <option value="">All Locations</option>
+                        <option value="remote">Remote</option>
+                        <option value="new-york">New York</option>
+                        <option value="california">California</option>
+                        <option value="texas">Texas</option>
+                        <option value="florida">Florida</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="skill-filter" class="filter-select">
+                        <option value="">All Skills</option>
+                        <option value="java">Java</option>
+                        <option value="python">Python</option>
+                        <option value="react">React</option>
+                        <option value="aws">AWS</option>
+                        <option value="devops">DevOps</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="visa-filter" class="filter-select">
+                        <option value="">All Visa Status</option>
+                        <option value="h1b-required">H1B Required</option>
+                        <option value="green-card-required">Green Card Required</option>
+                        <option value="no-sponsorship">No Sponsorship Needed</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <input type="text" id="salary-min" placeholder="Min Salary" class="filter-input">
+                    <input type="text" id="salary-max" placeholder="Max Salary" class="filter-input">
+                </div>
+            </div>
+            
+            <div class="jobs-grid" id="jobs-grid">
+                <div class="job-card" data-location="remote" data-skill="java" data-visa="h1b-required" data-salary="120000">
+                    <div class="job-header">
+                        <div class="company-logo">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <div class="job-meta">
+                            <span class="job-type">Full-time</span>
+                            <span class="visa-status">H1B Sponsored</span>
+                        </div>
+                    </div>
+                    <h3 class="job-title">Senior Java Developer</h3>
+                    <p class="company-name">Microsoft Corporation</p>
+                    <div class="job-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Remote / Seattle, WA</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>$120K - $150K</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Posted 2 days ago</span>
+                        </div>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Microservices</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-primary btn-apply" data-job="senior-java-dev">
+                            <i class="fas fa-paper-plane"></i>
+                            Apply Now
+                        </button>
+                        <button class="btn btn-outline btn-save">
+                            <i class="fas fa-bookmark"></i>
+                            Save
+                        </button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-location="new-york" data-skill="python" data-visa="green-card-required" data-salary="140000">
+                    <div class="job-header">
+                        <div class="company-logo">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="job-meta">
+                            <span class="job-type">Full-time</span>
+                            <span class="visa-status">Green Card Sponsored</span>
+                        </div>
+                    </div>
+                    <h3 class="job-title">Python Data Engineer</h3>
+                    <p class="company-name">Google LLC</p>
+                    <div class="job-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>New York, NY</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>$140K - $180K</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Posted 1 day ago</span>
+                        </div>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">GCP</span>
+                        <span class="skill-tag">BigQuery</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-primary btn-apply" data-job="python-data-engineer">
+                            <i class="fas fa-paper-plane"></i>
+                            Apply Now
+                        </button>
+                        <button class="btn btn-outline btn-save">
+                            <i class="fas fa-bookmark"></i>
+                            Save
+                        </button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-location="california" data-skill="react" data-visa="no-sponsorship" data-salary="130000">
+                    <div class="job-header">
+                        <div class="company-logo">
+                            <i class="fab fa-amazon"></i>
+                        </div>
+                        <div class="job-meta">
+                            <span class="job-type">Full-time</span>
+                            <span class="visa-status">No Sponsorship</span>
+                        </div>
+                    </div>
+                    <h3 class="job-title">Senior Frontend Developer</h3>
+                    <p class="company-name">Amazon Web Services</p>
+                    <div class="job-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>San Francisco, CA</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>$130K - $160K</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Posted 3 days ago</span>
+                        </div>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">GraphQL</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-primary btn-apply" data-job="senior-frontend-dev">
+                            <i class="fas fa-paper-plane"></i>
+                            Apply Now
+                        </button>
+                        <button class="btn btn-outline btn-save">
+                            <i class="fas fa-bookmark"></i>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jobs-cta" data-aos="fade-up" data-aos-delay="400">
+                <h3>Don't see the perfect role?</h3>
+                <p>Upload your resume and we'll match you with opportunities that fit your skills and career goals.</p>
+                <button class="btn btn-primary btn-large" id="upload-resume-btn">
+                    <i class="fas fa-upload"></i>
+                    Upload Resume
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources animate-on-scroll" id="resources">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Career Resources</span>
+                <h2 class="section-title">Tools & Guides for Success</h2>
+                <p class="section-subtitle">
+                    Free resources to accelerate your career growth and visa journey.
+                </p>
+            </div>
+            
+            <div class="resources-grid">
+                <div class="resource-card interactive-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>H1B Process Guide</h3>
+                    <p>Complete step-by-step guide to H1B visa application process, timeline, and requirements.</p>
+                    <div class="resource-meta">
+                        <span class="resource-type">PDF Guide</span>
+                        <span class="resource-size">2.5 MB</span>
+                    </div>
+                    <button class="btn btn-primary resource-download" data-resource="h1b-guide">
+                        <i class="fas fa-download"></i>
+                        Download Free
+                    </button>
+                    <div class="card-hover-effect"></div>
+                </div>
+
+                <div class="resource-card interactive-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="resource-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>IT Salary Report 2024</h3>
+                    <p>Comprehensive salary data for IT professionals across different locations and skill levels.</p>
+                    <div class="resource-meta">
+                        <span class="resource-type">Interactive Report</span>
+                        <span class="resource-size">Web App</span>
+                    </div>
+                    <button class="btn btn-primary resource-download" data-resource="salary-report">
+                        <i class="fas fa-external-link-alt"></i>
+                        View Report
+                    </button>
+                    <div class="card-hover-effect"></div>
+                </div>
+
+                <div class="resource-card interactive-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-word"></i>
+                    </div>
+                    <h3>Resume Templates</h3>
+                    <p>Professional resume templates optimized for ATS systems and IT roles.</p>
+                    <div class="resource-meta">
+                        <span class="resource-type">Template Pack</span>
+                        <span class="resource-size">5 Templates</span>
+                    </div>
+                    <button class="btn btn-primary resource-download" data-resource="resume-templates">
+                        <i class="fas fa-download"></i>
+                        Download Pack
+                    </button>
+                    <div class="card-hover-effect"></div>
+                </div>
+
+                <div class="resource-card interactive-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="resource-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Interview Question Bank</h3>
+                    <p>500+ technical and behavioral interview questions with sample answers.</p>
+                    <div class="resource-meta">
+                        <span class="resource-type">Question Bank</span>
+                        <span class="resource-size">500+ Questions</span>
+                    </div>
+                    <button class="btn btn-primary resource-download" data-resource="interview-questions">
+                        <i class="fas fa-eye"></i>
+                        Browse Questions
+                    </button>
+                    <div class="card-hover-effect"></div>
+                </div>
+
+                <div class="resource-card interactive-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="resource-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Salary Calculator</h3>
+                    <p>Calculate your expected salary based on skills, location, and experience level.</p>
+                    <div class="resource-meta">
+                        <span class="resource-type">Interactive Tool</span>
+                        <span class="resource-size">Web Tool</span>
+                    </div>
+                    <button class="btn btn-primary resource-download" data-resource="salary-calculator">
+                        <i class="fas fa-calculator"></i>
+                        Calculate Now
+                    </button>
+                    <div class="card-hover-effect"></div>
+                </div>
+
+                <div class="resource-card interactive-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="resource-icon">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <h3>Visa Timeline Tracker</h3>
+                    <p>Track your visa application progress and get notified of important deadlines.</p>
+                    <div class="resource-meta">
+                        <span class="resource-type">Tracking Tool</span>
+                        <span class="resource-size">Web App</span>
+                    </div>
+                    <button class="btn btn-primary resource-download" data-resource="visa-tracker">
+                        <i class="fas fa-clock"></i>
+                        Track Progress
+                    </button>
+                    <div class="card-hover-effect"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="case-studies animate-on-scroll">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Success Stories</span>
+                <h2 class="section-title">Real Career Transformations</h2>
+                <p class="section-subtitle">
+                    See how our professionals achieved their career goals with detailed case studies.
+                </p>
+            </div>
+            
+            <div class="case-studies-slider" data-aos="fade-up" data-aos-delay="200">
+                <div class="case-study-card active">
+                    <div class="case-study-content">
+                        <div class="case-study-header">
+                            <div class="professional-photo">
+                                <div class="photo-placeholder">SP</div>
+                            </div>
+                            <div class="professional-info">
+                                <h3>Suresh Patel</h3>
+                                <p>Software Engineer → Senior Software Architect</p>
+                                <div class="transformation-timeline">
+                                    <span class="timeline-item">2022: Joined CloudFlexIT</span>
+                                    <span class="timeline-item">2023: H1B Approved</span>
+                                    <span class="timeline-item">2024: Promoted to Senior Architect</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="case-study-metrics">
+                            <div class="metric">
+                                <span class="metric-value">120%</span>
+                                <span class="metric-label">Salary Increase</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">6 months</span>
+                                <span class="metric-label">H1B Processing</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">3</span>
+                                <span class="metric-label">Promotions</span>
+                            </div>
+                        </div>
+                        <div class="case-study-story">
+                            <p>"CloudFlexIT didn't just find me a job - they transformed my entire career trajectory. The personalized coaching and visa support made all the difference."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-study-card">
+                    <div class="case-study-content">
+                        <div class="case-study-header">
+                            <div class="professional-photo">
+                                <div class="photo-placeholder">MK</div>
+                            </div>
+                            <div class="professional-info">
+                                <h3>Maria Kim</h3>
+                                <p>QA Tester → DevOps Lead</p>
+                                <div class="transformation-timeline">
+                                    <span class="timeline-item">2021: Started as QA</span>
+                                    <span class="timeline-item">2022: Transitioned to DevOps</span>
+                                    <span class="timeline-item">2024: Team Lead at Fortune 500</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="case-study-metrics">
+                            <div class="metric">
+                                <span class="metric-value">150%</span>
+                                <span class="metric-label">Salary Increase</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">4 months</span>
+                                <span class="metric-label">Role Transition</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">5</span>
+                                <span class="metric-label">Team Members</span>
+                            </div>
+                        </div>
+                        <div class="case-study-story">
+                            <p>"The career coaching helped me identify my strengths and transition into DevOps. Now I'm leading a team at a Fortune 500 company!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta animate-on-scroll">
         <div class="container">
@@ -642,9 +1097,9 @@
                 <div class="cta-actions">
                     <a href="#contact" class="btn btn-primary btn-large pulse-animation">
                         <i class="fas fa-rocket"></i>
-                        Get Started Today
+                        Start Your Journey
                     </a>
-                    <a href="tel:+1-555-123-4567" class="btn btn-outline btn-large">
+                    <a href="tel:336-281-2871" class="btn btn-outline btn-large">
                         <i class="fas fa-phone"></i>
                         Call Now
                     </a>
@@ -686,7 +1141,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Our Office</h3>
-                            <p>123 Business Center Drive<br>Suite 500<br>New York, NY 10001</p>
+                            <p>CloudFlex IT Solutions, Inc.<br>Manikanta Thalapaneni<br>10926 David Taylor Dr.<br>Ste 120 PMB369<br>Charlotte, NC 28262</p>
                         </div>
                         <div class="card-hover-effect"></div>
                     </div>
@@ -697,8 +1152,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Phone</h3>
-                            <p><a href="tel:+1-555-123-4567">+1 (555) 123-4567</a></p>
-                            <p><a href="tel:+1-555-123-4568">+1 (555) 123-4568</a></p>
+                            <p><a href="tel:336-281-2871">336-281-2871</a></p>
                         </div>
                         <div class="card-hover-effect"></div>
                     </div>
@@ -709,8 +1163,8 @@
                         </div>
                         <div class="contact-details">
                             <h3>Email</h3>
-                            <p><a href="mailto:info@cloudflexit.com">info@cloudflexit.com</a></p>
-                            <p><a href="mailto:careers@cloudflexit.com">careers@cloudflexit.com</a></p>
+                            <p><a href="mailto:admin@cloudflexit.com">admin@cloudflexit.com</a></p>
+                            <p><a href="mailto:hr@cloudflexit.com">hr@cloudflexit.com</a></p>
                         </div>
                         <div class="card-hover-effect"></div>
                     </div>
@@ -781,6 +1235,38 @@
         </div>
     </section>
 
+    <!-- Success Metrics Banner -->
+    <section class="success-metrics">
+        <div class="container">
+            <div class="metrics-content">
+                <div class="live-notification" id="live-notifications">
+                    <div class="notification-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>John D. just got placed at Microsoft with H1B sponsorship!</span>
+                    </div>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="500">0</span>
+                        <span class="metric-label">Professionals Placed</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="98">0</span>
+                        <span class="metric-label">% Success Rate</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="150">0</span>
+                        <span class="metric-label">H1B Approvals</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="75">0</span>
+                        <span class="metric-label">Green Cards</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -795,10 +1281,10 @@
                             Empowering IT professionals with comprehensive W2 staffing solutions, visa sponsorship, and career development services.
                         </p>
                         <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.linkedin.com/company/cloudflex-it-solutions" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/cloudflex_it_solutions/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -841,15 +1327,15 @@
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Business Center Drive<br>Suite 500, New York, NY 10001</span>
+                            <span>10926 David Taylor Dr.<br>Ste 120 PMB369, Charlotte, NC 28262</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <a href="tel:+1-555-123-4567">+1 (555) 123-4567</a>
+                            <a href="tel:336-281-2871">336-281-2871</a>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <a href="mailto:info@cloudflexit.com">info@cloudflexit.com</a>
+                            <a href="mailto:admin@cloudflexit.com">admin@cloudflexit.com</a>
                         </div>
                     </div>
                 </div>
