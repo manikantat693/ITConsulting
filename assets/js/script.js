@@ -996,27 +996,284 @@
 
     // Handle job application
     function handleJobApplication(jobId) {
-        // Simulate application process
-        const modal = createModal('Job Application', `
-            <p>Thank you for your interest! We'll review your profile and get back to you within 24 hours.</p>
-            <div class="application-steps">
-                <div class="step completed">
-                    <i class="fas fa-check"></i>
-                    <span>Application Submitted</span>
+        const jobCard = document.querySelector(`[data-job="${jobId}"]`).closest('.job-card');
+        const jobTitle = jobCard.querySelector('.job-title').textContent;
+        const companyName = jobCard.querySelector('.company-name').textContent;
+        
+        const modal = createApplicationModal(jobTitle, companyName, jobId);
+        document.body.appendChild(modal);
+    }
+
+    // Create comprehensive application modal
+    function createApplicationModal(jobTitle, companyName, jobId) {
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay application-modal';
+        modal.innerHTML = `
+            <div class="modal-content application-modal-content">
+                <div class="modal-header">
+                    <div class="application-header-info">
+                        <h3>Apply for ${jobTitle}</h3>
+                        <p class="company-info">${companyName}</p>
+                    </div>
+                    <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">&times;</button>
                 </div>
-                <div class="step">
-                    <i class="fas fa-clock"></i>
-                    <span>Under Review</span>
-                </div>
-                <div class="step">
-                    <i class="fas fa-phone"></i>
-                    <span>Interview Scheduled</span>
+                <div class="modal-body">
+                    <form class="application-form" id="application-form-${jobId}">
+                        <div class="form-section">
+                            <h4><i class="fas fa-user"></i> Personal Information</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name *</label>
+                                    <input type="text" id="fullName" name="fullName" required>
+                                </div>
+                            </div>
+                                                         <div class="form-row two-columns">
+                                 <div class="form-group">
+                                     <label for="email">Email Address *</label>
+                                     <input type="email" id="email" name="email" required>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="phone">Phone Number *</label>
+                                     <input type="tel" id="phone" name="phone" required>
+                                 </div>
+                             </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h4><i class="fas fa-file-upload"></i> Resume Upload</h4>
+                            <div class="upload-container">
+                                <div class="upload-area" id="upload-area-${jobId}">
+                                    <div class="upload-icon">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <div class="upload-text">
+                                        <p>Drag and drop your resume here</p>
+                                        <span>or click to browse</span>
+                                    </div>
+                                    <input type="file" id="resume-upload-${jobId}" name="resume" accept=".pdf,.doc,.docx" required style="display: none;">
+                                </div>
+                                <div class="file-info" id="file-info-${jobId}" style="display: none;">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span class="file-name"></span>
+                                    <span class="file-size"></span>
+                                    <button type="button" class="remove-file" onclick="removeFile('${jobId}')">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h4><i class="fas fa-comment"></i> Additional Information</h4>
+                            <div class="form-group">
+                                <label for="coverLetter">Cover Letter / Message (Optional)</label>
+                                <textarea id="coverLetter" name="coverLetter" rows="4" placeholder="Tell us why you're interested in this position..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="application-consent">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="consent" required>
+                                <span class="checkmark"></span>
+                                I consent to CloudFlexIT processing my personal data for recruitment purposes
+                            </label>
+                        </div>
+
+                        <div class="application-actions">
+                            <button type="button" class="btn btn-outline" onclick="this.closest('.modal-overlay').remove()">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit Application
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        `);
+        `;
+
+        // Set up file upload functionality
+        setupFileUpload(modal, jobId);
         
-        document.body.appendChild(modal);
-        setTimeout(() => modal.remove(), 5000);
+        // Set up form submission
+        setupFormSubmission(modal, jobId, jobTitle, companyName);
+
+        return modal;
+    }
+
+    // Set up file upload functionality
+    function setupFileUpload(modal, jobId) {
+        const uploadArea = modal.querySelector(`#upload-area-${jobId}`);
+        const fileInput = modal.querySelector(`#resume-upload-${jobId}`);
+        const fileInfo = modal.querySelector(`#file-info-${jobId}`);
+
+        // Click to upload
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileUpload(files[0], jobId);
+            }
+        });
+
+        // File input change
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileUpload(e.target.files[0], jobId);
+            }
+        });
+    }
+
+    // Handle file upload
+    function handleFileUpload(file, jobId) {
+        const uploadArea = document.querySelector(`#upload-area-${jobId}`);
+        const fileInfo = document.querySelector(`#file-info-${jobId}`);
+        
+        // Validate file type
+        const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        if (!allowedTypes.includes(file.type)) {
+            showNotification('Please upload a PDF or Word document', 'error');
+            return;
+        }
+
+        // Validate file size (5MB max)
+        if (file.size > 5 * 1024 * 1024) {
+            showNotification('File size must be less than 5MB', 'error');
+            return;
+        }
+
+        // Store file reference
+        uploadArea.style.display = 'none';
+        fileInfo.style.display = 'flex';
+        fileInfo.querySelector('.file-name').textContent = file.name;
+        fileInfo.querySelector('.file-size').textContent = formatFileSize(file.size);
+        fileInfo.dataset.file = file.name;
+    }
+
+    // Remove uploaded file
+    window.removeFile = function(jobId) {
+        const uploadArea = document.querySelector(`#upload-area-${jobId}`);
+        const fileInfo = document.querySelector(`#file-info-${jobId}`);
+        const fileInput = document.querySelector(`#resume-upload-${jobId}`);
+        
+        uploadArea.style.display = 'flex';
+        fileInfo.style.display = 'none';
+        fileInput.value = '';
+    }
+
+    // Format file size
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // Set up form submission
+    function setupFormSubmission(modal, jobId, jobTitle, companyName) {
+        const form = modal.querySelector(`#application-form-${jobId}`);
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = form.querySelector('.btn-submit');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(form);
+                formData.append('jobTitle', jobTitle);
+                formData.append('companyName', companyName);
+                formData.append('jobId', jobId);
+                formData.append('applicationDate', new Date().toISOString());
+
+                // Send application via EmailJS or your preferred service
+                await sendApplicationEmail(formData);
+                
+                // Show success message
+                modal.innerHTML = `
+                    <div class="modal-content success-modal">
+                        <div class="success-content">
+                            <div class="success-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3>Application Submitted Successfully!</h3>
+                            <p>Thank you for applying to <strong>${jobTitle}</strong> at <strong>${companyName}</strong>.</p>
+                            <p>We'll review your application and get back to you within 24-48 hours.</p>
+                            <div class="next-steps">
+                                <h4>What's Next?</h4>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Application review (24-48 hours)</li>
+                                    <li><i class="fas fa-phone"></i> Initial screening call</li>
+                                    <li><i class="fas fa-users"></i> Technical interview</li>
+                                    <li><i class="fas fa-handshake"></i> Final decision</li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-primary" onclick="this.closest('.modal-overlay').remove()">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Error submitting application:', error);
+                showNotification('Failed to submit application. Please try again.', 'error');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+
+    // Send application email
+    async function sendApplicationEmail(formData) {
+        // Create email content
+        const emailContent = {
+            to: 'manibusinesshub@gmail.com',
+            subject: `Job Application: ${formData.get('jobTitle')} - ${formData.get('fullName')}`,
+            body: `
+                New Job Application Received
+                
+                Position: ${formData.get('jobTitle')}
+                Company: ${formData.get('companyName')}
+                
+                Applicant Details:
+                - Name: ${formData.get('fullName')}
+                - Email: ${formData.get('email')}
+                - Phone: ${formData.get('phone')}
+                
+                Cover Letter:
+                ${formData.get('coverLetter') || 'No cover letter provided'}
+                
+                Resume: ${formData.get('resume')?.name || 'No resume uploaded'}
+                
+                Application Date: ${new Date().toLocaleString()}
+            `
+        };
+
+        // In a real implementation, you would use a service like EmailJS, Formspree, or your own backend
+        // For now, we'll simulate the email sending
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                console.log('Email sent:', emailContent);
+                resolve();
+            }, 2000);
+        });
     }
 
     // Toggle save job
