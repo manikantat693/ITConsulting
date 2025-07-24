@@ -39,7 +39,7 @@
         initFloatingCards();
         initMorphingBlobs();
         initDynamicBackground();
-        initChatWidget();
+        initAIAssistant();
         initJobsPortal();
         initResourcesSection();
         initLanguageSelector();
@@ -829,8 +829,8 @@
         updateActiveLink
     };
 
-    // Chat Widget Functionality
-    function initChatWidget() {
+    // Advanced AI Assistant Functionality
+    function initAIAssistant() {
         const chatToggle = document.getElementById('chat-toggle');
         const chatWindow = document.getElementById('chat-window');
         const chatClose = document.getElementById('chat-close');
