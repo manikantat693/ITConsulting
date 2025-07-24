@@ -1,0 +1,169 @@
+# CloudFlex IT Local Development Configuration
+# This file contains environment variables and settings for local development
+
+# ===========================================
+# SERVER CONFIGURATION
+# ===========================================
+LOCAL_HOST=localhost
+LOCAL_PORT=8000
+LOCAL_URL=http://localhost:8000
+
+# ===========================================
+# DEVELOPMENT SETTINGS
+# ===========================================
+NODE_ENV=development
+DEBUG=true
+LIVE_RELOAD=true
+
+# ===========================================
+# API ENDPOINTS (Local Development)
+# ===========================================
+API_BASE_URL=http://localhost:8000/api
+CONTACT_API_ENDPOINT=/contact
+JOBS_API_ENDPOINT=/jobs
+IMMIGRATION_API_ENDPOINT=/immigration
+
+# ===========================================
+# EMAIL CONFIGURATION (Development)
+# ===========================================
+CONTACT_EMAIL=admin@cloudflexit.com
+HR_EMAIL=hr@cloudflexit.com
+BUSINESS_EMAIL=business@cloudflexit.com
+IMMIGRATION_EMAIL=immigration@cloudflexit.com
+
+# ===========================================
+# COMPANY INFORMATION
+# ===========================================
+COMPANY_NAME=CloudFlex IT Solutions, Inc.
+COMPANY_PHONE=336-281-2871
+COMPANY_ADDRESS=10926 David Taylor Dr. Ste 120 PMB369, Charlotte, NC 28262
+
+# ===========================================
+# SOCIAL MEDIA LINKS
+# ===========================================
+LINKEDIN_URL=https://www.linkedin.com/company/cloudflex-it-solutions
+INSTAGRAM_URL=https://www.instagram.com/cloudflex_it_solutions/
+FACEBOOK_URL=https://www.facebook.com/cloudflexit
+TWITTER_URL=https://twitter.com/cloudflexit
+
+# ===========================================
+# AI ASSISTANT CONFIGURATION
+# ===========================================
+AI_ASSISTANT_ENABLED=true
+VOICE_RECOGNITION_ENABLED=true
+SPEECH_SYNTHESIS_ENABLED=true
+AI_RESPONSE_DELAY_MIN=1500
+AI_RESPONSE_DELAY_MAX=2500
+CONVERSATION_MEMORY_LIMIT=10
+
+# ===========================================
+# FEATURE FLAGS
+# ===========================================
+ENABLE_ANALYTICS=false
+ENABLE_PWA=true
+ENABLE_SERVICE_WORKER=true
+ENABLE_LIVE_CHAT=true
+ENABLE_JOB_APPLICATIONS=true
+ENABLE_VOICE_INPUT=true
+
+# ===========================================
+# SECURITY SETTINGS (Development)
+# ===========================================
+CORS_ORIGIN=http://localhost:8000
+CSRF_PROTECTION=false
+RATE_LIMITING=false
+
+# ===========================================
+# PERFORMANCE SETTINGS
+# ===========================================
+CACHE_ENABLED=false
+COMPRESSION_ENABLED=true
+MINIFICATION=false
+IMAGE_OPTIMIZATION=false
+
+# ===========================================
+# LOGGING CONFIGURATION
+# ===========================================
+LOG_LEVEL=debug
+LOG_TO_CONSOLE=true
+LOG_TO_FILE=false
+ERROR_REPORTING=true
+
+# ===========================================
+# DATABASE (If needed for future features)
+# ===========================================
+# DB_HOST=localhost
+# DB_PORT=5432
+# DB_NAME=cloudflexit_dev
+# DB_USER=dev_user
+# DB_PASSWORD=dev_password
+
+# ===========================================
+# THIRD-PARTY INTEGRATIONS
+# ===========================================
+GOOGLE_ANALYTICS_ID=GA_TRACKING_ID
+GOOGLE_MAPS_API_KEY=YOUR_GOOGLE_MAPS_KEY
+RECAPTCHA_SITE_KEY=YOUR_RECAPTCHA_SITE_KEY
+
+# ===========================================
+# FILE UPLOAD SETTINGS
+# ===========================================
+MAX_FILE_SIZE=5MB
+ALLOWED_FILE_TYPES=pdf,doc,docx,txt
+UPLOAD_PATH=./uploads/resumes
+
+# ===========================================
+# NOTIFICATION SETTINGS
+# ===========================================
+EMAIL_NOTIFICATIONS=true
+SLACK_NOTIFICATIONS=false
+DISCORD_NOTIFICATIONS=false
+
+# ===========================================
+# BACKUP SETTINGS
+# ===========================================
+AUTO_BACKUP=false
+BACKUP_INTERVAL=24h
+BACKUP_PATH=./backups
+
+# ===========================================
+# MONITORING & HEALTH CHECKS
+# ===========================================
+HEALTH_CHECK_ENABLED=true
+UPTIME_MONITORING=false
+PERFORMANCE_MONITORING=true
+
+# ===========================================
+# DEVELOPMENT TOOLS
+# ===========================================
+HOT_RELOAD=true
+SOURCE_MAPS=true
+BUNDLE_ANALYZER=false
+DEV_TOOLS=true
+
+# ===========================================
+# CONTENT SETTINGS
+# ===========================================
+DEFAULT_LANGUAGE=en
+SUPPORTED_LANGUAGES=en,es,hi
+TIMEZONE=America/New_York
+DATE_FORMAT=MM/DD/YYYY
+
+# ===========================================
+# AI ASSISTANT RESPONSES
+# ===========================================
+AI_GREETING_MESSAGE="Welcome to CloudFlex AI Assistant!"
+AI_FALLBACK_MESSAGE="I'm here to help with immigration, jobs, and consulting questions."
+AI_ERROR_MESSAGE="I'm experiencing technical difficulties. Please try again."
+
+# ===========================================
+# CUSTOM CONFIGURATION
+# ===========================================
+BRAND_PRIMARY_COLOR=#667eea
+BRAND_SECONDARY_COLOR=#764ba2
+BRAND_ACCENT_COLOR=#2ed573
+LOGO_PATH=./assets/images/CFITS Vertical logo PNG.png
+
+# ===========================================
+# END OF LOCAL CONFIGURATION
+# ===========================================
