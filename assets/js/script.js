@@ -831,44 +831,201 @@
 
     // Advanced AI Assistant Functionality
     function initAIAssistant() {
-        const chatToggle = document.getElementById('chat-toggle');
-        const chatWindow = document.getElementById('chat-window');
-        const chatClose = document.getElementById('chat-close');
-        const chatInput = document.getElementById('chat-input-field');
-        const chatSend = document.getElementById('chat-send');
-        const chatMessages = document.getElementById('chat-messages');
+        const aiToggle = document.getElementById('ai-toggle');
+        const aiWindow = document.getElementById('ai-window');
+        const aiClose = document.getElementById('ai-close');
+        const aiMinimize = document.getElementById('ai-minimize');
+        const aiSend = document.getElementById('ai-send');
+        const aiInput = document.getElementById('ai-input');
+        const aiMessages = document.getElementById('ai-messages');
+        const aiTyping = document.getElementById('ai-typing');
+        const voiceBtn = document.getElementById('ai-voice-btn');
 
-        if (!chatToggle || !chatWindow) return;
+        if (!aiToggle || !aiWindow) return;
 
-        // Toggle chat window
-        chatToggle.addEventListener('click', () => {
-            chatWindow.classList.toggle('active');
-            if (chatWindow.classList.contains('active')) {
-                chatInput.focus();
+        let isVoiceActive = false;
+        let recognition = null;
+        let synthesis = window.speechSynthesis;
+        let conversationContext = [];
+
+        // Initialize speech recognition if available
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+        }
+
+        // Toggle AI window
+        aiToggle.addEventListener('click', () => {
+            aiWindow.classList.toggle('active');
+            if (aiWindow.classList.contains('active')) {
+                aiInput.focus();
+                updateNotification('');
             }
         });
 
-        // Close chat window
-        if (chatClose) {
-            chatClose.addEventListener('click', () => {
-                chatWindow.classList.remove('active');
+        // Close AI window
+        if (aiClose) {
+            aiClose.addEventListener('click', () => {
+                aiWindow.classList.remove('active');
             });
         }
 
-        // Send message
+        // Minimize AI window
+        if (aiMinimize) {
+            aiMinimize.addEventListener('click', () => {
+                aiWindow.classList.remove('active');
+                updateNotification('Minimized - Click to continue chat');
+            });
+        }
+
+        // Voice input functionality
+        if (voiceBtn && recognition) {
+            voiceBtn.addEventListener('click', toggleVoiceInput);
+        } else if (voiceBtn) {
+            voiceBtn.style.display = 'none';
+        }
+
+        // Handle capability cards
+        const capabilityCards = document.querySelectorAll('.capability-card');
+        capabilityCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                const capability = e.currentTarget.dataset.capability;
+                handleCapabilitySelection(capability);
+            });
+        });
+
+        // Handle quick actions
+        const quickActions = document.querySelectorAll('.quick-action');
+        quickActions.forEach(action => {
+            action.addEventListener('click', (e) => {
+                const actionType = e.target.dataset.action;
+                handleQuickAction(actionType);
+            });
+        });
+
+        // Handle suggestion chips
+        const suggestionChips = document.querySelectorAll('.suggestion-chip');
+        suggestionChips.forEach(chip => {
+            chip.addEventListener('click', (e) => {
+                aiInput.value = e.target.textContent;
+                sendMessage();
+            });
+        });
+
+        // Auto-resize textarea
+        if (aiInput) {
+            aiInput.addEventListener('input', () => {
+                aiInput.style.height = 'auto';
+                aiInput.style.height = aiInput.scrollHeight + 'px';
+                if (aiSend) {
+                    aiSend.disabled = !aiInput.value.trim();
+                }
+            });
+        }
+
+        // Send message functionality
         function sendMessage() {
-            const message = chatInput.value.trim();
+            const message = aiInput.value.trim();
             if (!message) return;
 
-            // Add user message
             addMessage(message, 'user');
-            chatInput.value = '';
+            aiInput.value = '';
+            aiInput.style.height = 'auto';
+            if (aiSend) {
+                aiSend.disabled = true;
+            }
 
-            // Get AI immigration response
+            showTypingIndicator();
+
             setTimeout(() => {
-                const response = getImmigrationResponse(message);
-                addMessage(response, 'bot');
-            }, 1000);
+                hideTypingIndicator();
+                const response = generateAIResponse(message);
+                addMessage(response, 'ai');
+                
+                conversationContext.push({ user: message, ai: response });
+                if (conversationContext.length > 10) {
+                    conversationContext.shift();
+                }
+            }, 1500 + Math.random() * 1000);
+        }
+
+        function toggleVoiceInput() {
+            if (!recognition) return;
+
+            if (isVoiceActive) {
+                recognition.stop();
+                isVoiceActive = false;
+                voiceBtn.classList.remove('active');
+            } else {
+                recognition.start();
+                isVoiceActive = true;
+                voiceBtn.classList.add('active');
+            }
+        }
+
+        if (recognition) {
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                aiInput.value = transcript;
+                sendMessage();
+            };
+
+            recognition.onend = () => {
+                isVoiceActive = false;
+                voiceBtn.classList.remove('active');
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                isVoiceActive = false;
+                voiceBtn.classList.remove('active');
+            };
+        }
+
+        function handleCapabilitySelection(capability) {
+            const responses = {
+                immigration: "Tell me about your immigration needs - H1B, Green Card, or other visa questions?",
+                jobs: "I can help you find the perfect IT job opportunity. What type of role are you looking for?",
+                consulting: "Let's discuss how CloudFlex IT can help transform your business with our consulting services.",
+                career: "I'm here to help accelerate your career growth. What are your professional goals?"
+            };
+            
+            if (responses[capability]) {
+                aiInput.value = responses[capability];
+                sendMessage();
+            }
+        }
+
+        function handleQuickAction(actionType) {
+            const actions = {
+                'start-immigration': 'I need help with immigration and visa processes',
+                'find-jobs': 'Show me available job opportunities',
+                'get-consulting': 'I want to learn about IT consulting services',
+                'schedule-call': 'I would like to schedule a consultation call'
+            };
+
+            if (actions[actionType]) {
+                aiInput.value = actions[actionType];
+                sendMessage();
+            }
+        }
+
+        function showTypingIndicator() {
+            if (aiTyping) {
+                aiTyping.classList.add('active');
+                if (aiMessages) {
+                    aiMessages.scrollTop = aiMessages.scrollHeight;
+                }
+            }
+        }
+
+        function hideTypingIndicator() {
+            if (aiTyping) {
+                aiTyping.classList.remove('active');
+            }
         }
 
         // AI Immigration Response Engine
@@ -1870,197 +2027,232 @@
         }, 500);
     };
 
-})();
+    function addMessage(content, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}-message`;
+        
+        const avatarContent = sender === 'user' ? 
+            '<i class="fas fa-user"></i>' : 
+            '<div class="ai-thinking"><div class="thinking-dot"></div><div class="thinking-dot"></div><div class="thinking-dot"></div></div>';
+        
+        messageDiv.innerHTML = `
+            <div class="message-avatar">
+                ${avatarContent}
+            </div>
+            <div class="message-content">
+                ${sender === 'ai' ? content : `<p>${content}</p>`}
+            </div>
+        `;
 
-// Custom CSS for interactive elements
-const customStyles = `
-<style>
-.char-animate {
-    display: inline-block;
-    opacity: 0;
-    animation: charFadeIn 0.5s ease-out forwards;
-}
-
-@keyframes charFadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+        if (aiMessages) {
+            aiMessages.appendChild(messageDiv);
+            aiMessages.scrollTop = aiMessages.scrollHeight;
+        }
     }
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+
+    function updateNotification(text) {
+        const notification = document.getElementById('ai-notification');
+        if (notification) {
+            notification.textContent = text || 'Ask me anything!';
+        }
     }
-}
 
-.custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9999;
-}
-
-.cursor-dot {
-    width: 4px;
-    height: 4px;
-    background: var(--primary-color);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.cursor-outline {
-    width: 30px;
-    height: 30px;
-    border: 2px solid var(--primary-color);
-    border-radius: 50%;
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    transform: translate(-50%, -50%);
-    transition: all 0.1s ease-out;
-}
-
-.custom-cursor.cursor-hover .cursor-outline {
-    width: 50px;
-    height: 50px;
-    top: -25px;
-    left: -25px;
-}
-
-.blob-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.morphing-blob {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
-    border-radius: 50%;
-    filter: blur(40px);
-    animation: morphBlob 20s infinite linear;
-}
-
-@keyframes morphBlob {
-    0%, 100% {
-        border-radius: 50% 50% 50% 50%;
-        transform: rotate(0deg) scale(1);
+    function generateAIResponse(userMessage) {
+        const message = userMessage.toLowerCase();
+        
+        if (message.includes('immigration') || message.includes('visa') || message.includes('h1b') || message.includes('green card')) {
+            return generateImmigrationResponse(message);
+        } else if (message.includes('job') || message.includes('career') || message.includes('position')) {
+            return generateJobResponse();
+        } else if (message.includes('consulting') || message.includes('business') || message.includes('service')) {
+            return generateConsultingResponse();
+        } else if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+            return generateGreetingResponse();
+        } else {
+            return generateGeneralResponse();
+        }
     }
-    25% {
-        border-radius: 60% 40% 60% 40%;
-        transform: rotate(90deg) scale(1.1);
+
+    function generateImmigrationResponse(message) {
+        if (message.includes('h1b')) {
+            return `
+                <div class="ai-response">
+                    <h5>🏛️ H1B Visa Assistance</h5>
+                    <p>CloudFlex IT specializes in H1B sponsorship with a 95% success rate!</p>
+                    <ul>
+                        <li><strong>Full Sponsorship:</strong> We cover all costs</li>
+                        <li><strong>Expert Processing:</strong> Dedicated legal team</li>
+                        <li><strong>Timeline:</strong> 6-8 months average</li>
+                    </ul>
+                    <button class="quick-action" onclick="scheduleConsultation()">Schedule Consultation</button>
+                </div>
+            `;
+        } else if (message.includes('green card')) {
+            return `
+                <div class="ai-response">
+                    <h5>🟢 Green Card Process</h5>
+                    <p>We help with employment-based Green Card applications:</p>
+                    <ul>
+                        <li><strong>EB-2/EB-3:</strong> Advanced degree professionals</li>
+                        <li><strong>PERM Process:</strong> Labor certification</li>
+                        <li><strong>Success Rate:</strong> 200+ approvals</li>
+                    </ul>
+                    <button class="quick-action" onclick="checkEligibility()">Check Eligibility</button>
+                </div>
+            `;
+        } else {
+            return `
+                <div class="ai-response">
+                    <h5>🛂 Immigration Services</h5>
+                    <p>We provide comprehensive immigration support including H1B, Green Card, and other visa services.</p>
+                    <button class="quick-action" onclick="scheduleConsultation()">Get Free Assessment</button>
+                </div>
+            `;
+        }
     }
-    50% {
-        border-radius: 40% 60% 40% 60%;
-        transform: rotate(180deg) scale(0.9);
+
+    function generateJobResponse() {
+        return `
+            <div class="ai-response">
+                <h5>💼 IT Job Opportunities</h5>
+                <p>CloudFlex IT has 15+ open positions with H1B sponsorship:</p>
+                <ul>
+                    <li>Software Engineers (React, Node.js, Python)</li>
+                    <li>Cloud Architects (AWS, Azure)</li>
+                    <li>Data Scientists & Analysts</li>
+                    <li>DevOps Engineers</li>
+                </ul>
+                <p><strong>Salary:</strong> $80K - $150K + Benefits</p>
+                <button class="quick-action" onclick="window.location.href='#jobs'">View All Jobs</button>
+            </div>
+        `;
     }
-    75% {
-        border-radius: 60% 40% 60% 40%;
-        transform: rotate(270deg) scale(1.05);
+
+    function generateConsultingResponse() {
+        return `
+            <div class="ai-response">
+                <h5>🚀 IT Consulting Services</h5>
+                <p>Transform your business with our expert consulting:</p>
+                <ul>
+                    <li>Cloud Migration & Optimization</li>
+                    <li>DevOps & Automation</li>
+                    <li>Custom Software Development</li>
+                    <li>Data Analytics & AI Solutions</li>
+                </ul>
+                <p><strong>500+</strong> successful projects delivered</p>
+                <button class="quick-action" onclick="getConsultingQuote()">Get Free Quote</button>
+            </div>
+        `;
     }
-}
 
-.input-wrapper {
-    position: relative;
-    margin-bottom: 1rem;
-}
+    function generateGreetingResponse() {
+        return `
+            <div class="ai-response">
+                <h5>👋 Welcome to CloudFlex AI Assistant!</h5>
+                <p>I'm here to help with:</p>
+                <div class="help-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0;">
+                    <div style="text-align: center; padding: 10px; background: rgba(102, 126, 234, 0.1); border-radius: 8px;">
+                        <i class="fas fa-passport"></i>
+                        <span>Immigration</span>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: rgba(102, 126, 234, 0.1); border-radius: 8px;">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Jobs</span>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: rgba(102, 126, 234, 0.1); border-radius: 8px;">
+                        <i class="fas fa-cogs"></i>
+                        <span>Consulting</span>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: rgba(102, 126, 234, 0.1); border-radius: 8px;">
+                        <i class="fas fa-rocket"></i>
+                        <span>Career</span>
+                    </div>
+                </div>
+                <p>What can I help you with today?</p>
+            </div>
+        `;
+    }
 
-.input-wrapper.focused input,
-.input-wrapper.focused textarea,
-.input-wrapper.focused select {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
+    function generateGeneralResponse() {
+        return `
+            <div class="ai-response">
+                <h5>🤖 How can I assist you?</h5>
+                <p>I specialize in helping with:</p>
+                <ul>
+                    <li><strong>Immigration:</strong> H1B, Green Card processes</li>
+                    <li><strong>Careers:</strong> Job opportunities and growth</li>
+                    <li><strong>Consulting:</strong> IT solutions and services</li>
+                </ul>
+                <p>Try asking: "Tell me about H1B visa" or "What jobs are available?"</p>
+            </div>
+        `;
+    }
 
-.input-wrapper.error input,
-.input-wrapper.error textarea,
-.input-wrapper.error select {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
-.input-wrapper.valid input,
-.input-wrapper.valid textarea,
-.input-wrapper.valid select {
-    border-color: var(--secondary-color);
-}
-
-.error-message {
-    color: #ef4444;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-    display: none;
-}
-
-.scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 3px;
-    background: var(--gradient-primary);
-    z-index: 9999;
-    transition: width 0.1s ease-out;
-}
-
-.header.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-}
-
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease-out;
-}
-
-.animate-on-scroll.animate-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    transition: opacity 0.5s ease-out;
-}
-
-.loading-screen::before {
-    content: 'CloudFlexIT';
-    color: white;
-    font-size: 2rem;
-    font-weight: 800;
-    animation: pulse 2s infinite;
-}
-
-@media (max-width: 768px) {
-    .custom-cursor {
-        display: none;
+    // Event listeners for send button and input
+    if (aiSend) {
+        aiSend.addEventListener('click', sendMessage);
     }
     
-    .morphing-blob {
-        width: 150px;
-        height: 150px;
+    if (aiInput) {
+        aiInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
     }
-}
-</style>
-`;
 
-// Inject custom styles
-document.head.insertAdjacentHTML('beforeend', customStyles);
+    // Global functions for action buttons
+    window.scheduleConsultation = function() {
+        addMessage("I'd like to schedule a consultation", 'user');
+        setTimeout(() => {
+            addMessage(`
+                <div class="ai-response">
+                    <h5>📅 Schedule Your Consultation</h5>
+                    <p>Great! I'll connect you with our experts.</p>
+                    <p><strong>Contact Information:</strong></p>
+                    <ul>
+                        <li>📧 Email: admin@cloudflexit.com</li>
+                        <li>📞 Phone: 336-281-2871</li>
+                        <li>🕒 Available: Mon-Fri, 9 AM - 6 PM EST</li>
+                    </ul>
+                    <p>We'll get back to you within 24 hours!</p>
+                </div>
+            `, 'ai');
+        }, 1000);
+    };
+
+    window.checkEligibility = function() {
+        addMessage("I want to check my immigration eligibility", 'user');
+        setTimeout(() => {
+            addMessage(`
+                <div class="ai-response">
+                    <h5>✅ Eligibility Check</h5>
+                    <p>Let's assess your immigration options:</p>
+                    <ul>
+                        <li><strong>Education:</strong> Bachelor's degree required for H1B</li>
+                        <li><strong>Experience:</strong> 3+ years in specialty occupation</li>
+                        <li><strong>Sponsorship:</strong> Job offer from US employer</li>
+                    </ul>
+                    <p>Email us your resume for a detailed assessment: <strong>hr@cloudflexit.com</strong></p>
+                </div>
+            `, 'ai');
+        }, 1000);
+    };
+
+    window.getConsultingQuote = function() {
+        window.open('mailto:business@cloudflexit.com?subject=Consulting Quote Request', '_blank');
+    };
+
+    // Initialize with welcome message
+    setTimeout(() => {
+        addMessage(generateGreetingResponse(), 'ai');
+    }, 1000);
+
+    return {
+        addMessage,
+        generateAIResponse,
+        handleCapabilitySelection,
+        handleQuickAction
+    };
+})();
