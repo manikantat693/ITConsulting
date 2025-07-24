@@ -873,17 +873,102 @@
             addMessage(message, 'user');
             chatInput.value = '';
 
-            // Simulate bot response
+            // Get AI immigration response
             setTimeout(() => {
-                const responses = [
-                    "Thank you for your message! A member of our team will get back to you shortly.",
-                    "I'd be happy to help you with information about our W2 staffing services.",
-                    "For visa sponsorship questions, I can connect you with our immigration specialist.",
-                    "Would you like to schedule a free consultation to discuss your career goals?"
-                ];
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                addMessage(randomResponse, 'bot');
+                const response = getImmigrationResponse(message);
+                addMessage(response, 'bot');
             }, 1000);
+        }
+
+        // AI Immigration Response Engine
+        function getImmigrationResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            // H1B related queries
+            if (message.includes('h1b') || message.includes('h-1b')) {
+                return `🎯 <strong>H1B Information:</strong><br><br>
+                • <strong>Timeline:</strong> 6-8 months for premium processing<br>
+                • <strong>Requirements:</strong> Bachelor's degree + job offer<br>
+                • <strong>Our Success Rate:</strong> 95% approval rate<br>
+                • <strong>Cost:</strong> We cover all filing fees<br><br>
+                💼 <em>We handle the entire H1B process for you!</em><br>
+                <button class="chat-action-btn" onclick="scheduleConsultation()">Schedule Free Consultation</button>`;
+            }
+            
+            // Green Card related queries
+            if (message.includes('green card') || message.includes('greencard') || message.includes('permanent resident')) {
+                return `🟢 <strong>Green Card Process:</strong><br><br>
+                • <strong>EB-2/EB-3:</strong> Employment-based categories<br>
+                • <strong>Timeline:</strong> 1-3 years (varies by country)<br>
+                • <strong>PERM Process:</strong> We handle labor certification<br>
+                • <strong>Priority Dates:</strong> Current for most countries<br><br>
+                🏆 <em>150+ Green Cards approved through our program!</em><br>
+                <button class="chat-action-btn" onclick="checkEligibility()">Check Your Eligibility</button>`;
+            }
+            
+            // Timeline related queries
+            if (message.includes('timeline') || message.includes('how long') || message.includes('duration')) {
+                return `⏰ <strong>Immigration Timeline Guide:</strong><br><br>
+                • <strong>H1B Filing:</strong> 6-8 months<br>
+                • <strong>H1B Transfer:</strong> 2-4 months<br>
+                • <strong>Green Card (PERM):</strong> 18-24 months<br>
+                • <strong>I-485 Filing:</strong> 12-18 months<br><br>
+                📊 <em>Premium processing available for faster results!</em><br>
+                <button class="chat-action-btn" onclick="showTimeline()">View Detailed Timeline</button>`;
+            }
+            
+            // Documents related queries
+            if (message.includes('document') || message.includes('paperwork') || message.includes('files')) {
+                return `📋 <strong>Required Documents:</strong><br><br>
+                <strong>For H1B:</strong><br>
+                • Educational transcripts & degree<br>
+                • Resume and job offer letter<br>
+                • Passport and current visa status<br><br>
+                <strong>For Green Card:</strong><br>
+                • Birth certificate<br>
+                • Marriage certificate (if applicable)<br>
+                • Educational credentials evaluation<br><br>
+                📁 <em>We provide a complete checklist!</em><br>
+                <button class="chat-action-btn" onclick="getDocumentChecklist()">Get Document Checklist</button>`;
+            }
+            
+            // Cost related queries
+            if (message.includes('cost') || message.includes('fee') || message.includes('price') || message.includes('money')) {
+                return `💰 <strong>Immigration Costs:</strong><br><br>
+                • <strong>H1B:</strong> $0 upfront - We cover all fees<br>
+                • <strong>Green Card:</strong> Employer-sponsored process<br>
+                • <strong>Legal Fees:</strong> Included in our service<br>
+                • <strong>Government Fees:</strong> We handle all payments<br><br>
+                🎁 <em>No hidden costs - transparent pricing!</em><br>
+                <button class="chat-action-btn" onclick="getFeeBreakdown()">Get Detailed Fee Breakdown</button>`;
+            }
+            
+            // Eligibility related queries
+            if (message.includes('eligible') || message.includes('qualify') || message.includes('requirements')) {
+                return `✅ <strong>Eligibility Check:</strong><br><br>
+                <strong>H1B Requirements:</strong><br>
+                • Bachelor's degree or equivalent<br>
+                • Job offer in specialty occupation<br>
+                • Employer willing to sponsor<br><br>
+                <strong>Green Card Requirements:</strong><br>
+                • Permanent job offer<br>
+                • Labor certification (PERM)<br>
+                • Priority date availability<br><br>
+                🔍 <em>Let's check your specific situation!</em><br>
+                <button class="chat-action-btn" onclick="startEligibilityQuiz()">Take Eligibility Quiz</button>`;
+            }
+            
+            // Default comprehensive response
+            return `🏛️ <strong>CloudFlexIT Immigration Services:</strong><br><br>
+            I can help you with:<br>
+            • H1B visa process and requirements<br>
+            • Green Card applications (EB-2/EB-3)<br>
+            • Visa transfers and extensions<br>
+            • Document preparation and filing<br>
+            • Timeline and cost estimates<br><br>
+            💬 <em>Ask me anything about immigration!</em><br>
+            Examples: "How long does H1B take?" or "What documents do I need?"<br><br>
+            <button class="chat-action-btn" onclick="scheduleConsultation()">Talk to Immigration Expert</button>`;
         }
 
         // Add message to chat
@@ -892,14 +977,48 @@
             messageDiv.className = `message ${sender}-message`;
             messageDiv.innerHTML = `
                 <div class="message-avatar">
-                    <i class="fas fa-${sender === 'user' ? 'user' : 'robot'}"></i>
+                    <i class="fas fa-${sender === 'user' ? 'user' : 'passport'}"></i>
                 </div>
                 <div class="message-content">
-                    <p>${text}</p>
+                    ${text}
                 </div>
             `;
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Set up quick option buttons
+            if (sender === 'bot') {
+                setupQuickOptions(messageDiv);
+            }
+        }
+
+        // Setup quick option buttons
+        function setupQuickOptions(messageDiv) {
+            const quickBtns = messageDiv.querySelectorAll('.quick-btn');
+            quickBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const topic = btn.dataset.topic;
+                    handleQuickOption(topic);
+                });
+            });
+        }
+
+        // Handle quick option selections
+        function handleQuickOption(topic) {
+            const responses = {
+                'h1b': 'Tell me about H1B process',
+                'greencard': 'What about Green Card process?',
+                'timeline': 'How long does the immigration process take?',
+                'documents': 'What documents do I need for immigration?'
+            };
+            
+            const userMessage = responses[topic];
+            addMessage(userMessage, 'user');
+            
+            setTimeout(() => {
+                const response = getImmigrationResponse(userMessage);
+                addMessage(response, 'bot');
+            }, 500);
         }
 
         // Send message events
@@ -1690,8 +1809,75 @@
             </div>
         `);
 
-        document.body.appendChild(tracker);
-    }
+                 document.body.appendChild(tracker);
+     }
+
+    // Immigration Bot Action Functions
+    window.scheduleConsultation = function() {
+        addMessage('I would like to schedule a consultation', 'user');
+        setTimeout(() => {
+            addMessage(`📅 <strong>Schedule Your Free Immigration Consultation</strong><br><br>
+            Our immigration experts are available:<br>
+            • Monday-Friday: 9 AM - 6 PM EST<br>
+            • Saturday: 10 AM - 2 PM EST<br><br>
+            📞 <strong>Call:</strong> 336-281-2871<br>
+            📧 <strong>Email:</strong> admin@cloudflexit.com<br><br>
+            <button class="chat-action-btn" onclick="window.open('tel:336-281-2871')">Call Now</button>
+            <button class="chat-action-btn" onclick="window.open('mailto:admin@cloudflexit.com?subject=Immigration Consultation Request')">Send Email</button>`, 'bot');
+        }, 500);
+    };
+
+    window.checkEligibility = function() {
+        addMessage('Check my Green Card eligibility', 'user');
+        setTimeout(() => {
+            addMessage(`🔍 <strong>Green Card Eligibility Quiz</strong><br><br>
+            Answer these quick questions:<br><br>
+            1. <strong>Education:</strong> Do you have a Bachelor's degree or higher?<br>
+            2. <strong>Experience:</strong> Do you have 2+ years work experience?<br>
+            3. <strong>Job Offer:</strong> Do you have a permanent job offer?<br>
+            4. <strong>Current Status:</strong> Are you in the US on a valid visa?<br><br>
+            📋 <em>If you answered YES to all questions, you likely qualify!</em><br><br>
+            <button class="chat-action-btn" onclick="scheduleConsultation()">Get Detailed Assessment</button>`, 'bot');
+        }, 500);
+    };
+
+    window.showTimeline = function() {
+        addMessage('Show me detailed immigration timeline', 'user');
+        setTimeout(() => {
+            addMessage(`📊 <strong>Detailed Immigration Timeline</strong><br><br>
+            <strong>H1B Process:</strong><br>
+            • Application Filing: 1-2 weeks<br>
+            • USCIS Processing: 3-6 months<br>
+            • Premium Processing: 15 days<br><br>
+            <strong>Green Card Process:</strong><br>
+            • PERM Labor Certification: 6-12 months<br>
+            • I-140 Petition: 6-8 months<br>
+            • I-485 Adjustment: 12-18 months<br><br>
+            ⚡ <em>We expedite wherever possible!</em><br><br>
+            <button class="chat-action-btn" onclick="getPersonalizedTimeline()">Get Your Personal Timeline</button>`, 'bot');
+        }, 500);
+    };
+
+    window.getDocumentChecklist = function() {
+        addMessage('Get document checklist', 'user');
+        setTimeout(() => {
+            addMessage(`📋 <strong>Immigration Document Checklist</strong><br><br>
+            <strong>Personal Documents:</strong><br>
+            ✓ Passport (all pages)<br>
+            ✓ Birth certificate<br>
+            ✓ Marriage certificate (if applicable)<br><br>
+            <strong>Educational Documents:</strong><br>
+            ✓ Degree certificates<br>
+            ✓ Official transcripts<br>
+            ✓ WES/ECE evaluation<br><br>
+            <strong>Employment Documents:</strong><br>
+            ✓ Current resume<br>
+            ✓ Job offer letter<br>
+            ✓ Experience letters<br><br>
+            📁 <em>We'll guide you through each step!</em><br><br>
+            <button class="chat-action-btn" onclick="scheduleConsultation()">Get Personalized Checklist</button>`, 'bot');
+        }, 500);
+    };
 
 })();
 
