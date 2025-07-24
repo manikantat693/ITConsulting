@@ -2814,6 +2814,70 @@ section {
     .upload-icon {
         width: 40px;
         height: 40px;
-        font-size: var(--fs-xl);
-    }
+                 font-size: var(--fs-xl);
+     }
+ }
+
+/* Immigration Bot Styles */
+.quick-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin: var(--spacing-sm) 0;
+}
+
+.quick-btn {
+    background: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-xs);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-weight: 500;
+}
+
+.quick-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.chat-action-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: var(--white-color);
+    border: none;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    margin: var(--spacing-xs) var(--spacing-xs) 0 0;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.chat-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.message-content strong {
+    color: var(--primary-color);
+}
+
+.message-content em {
+    color: var(--secondary-color);
+    font-style: normal;
+    font-weight: 500;
+}
+
+.chat-header h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.chat-header i {
+    color: #fbbf24;
 }
