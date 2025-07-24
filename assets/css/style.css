@@ -334,6 +334,29 @@ a:hover {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    display: inline-block;
+    position: relative;
+    word-spacing: normal;
+    letter-spacing: -0.01em;
+}
+
+/* Typing Text Animation */
+.typing-text {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid var(--white-color);
+    animation: typeText 4s steps(20, end), blink 1s step-end infinite;
+}
+
+@keyframes typeText {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--white-color); }
 }
 
 /* Theme Toggle */
@@ -749,8 +772,10 @@ section {
 .hero-title {
     font-size: var(--fs-6xl);
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.2;
     margin-bottom: var(--spacing-md);
+    word-spacing: 0.1em;
+    letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
