@@ -116,6 +116,7 @@ body.loaded {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
+    width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -253,6 +254,7 @@ a:hover {
 .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--spacing-xs);
     padding: var(--spacing-sm) var(--spacing-lg);
     font-size: var(--fs-base);
@@ -462,7 +464,7 @@ section {
     left: 100%;
 }
 
-/* Header */
+/* Header & Navigation */
 .header {
     position: fixed;
     top: 0;
@@ -482,54 +484,66 @@ section {
 }
 
 .navbar {
-    padding: var(--spacing-md) 0;
+    padding: 0;
     min-height: 80px;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .navbar .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
-    min-height: 80px;
+    height: 80px;
+    width: 100%;
+    padding: 0 var(--spacing-md);
 }
 
 .nav-brand {
     display: flex;
     align-items: center;
     height: 100%;
+    flex-shrink: 0;
 }
 
 .nav-brand .logo {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: var(--spacing-sm);
     font-size: var(--fs-xl);
     font-weight: 800;
     color: var(--dark-color);
     height: 100%;
-    min-height: 60px;
     text-decoration: none;
+    padding: var(--spacing-sm) 0;
 }
 
 .logo-img {
-    height: 50px;
+    height: 45px;
     width: auto;
-    max-width: 200px;
+    max-width: 180px;
     object-fit: contain;
     transition: var(--transition-normal);
-    vertical-align: middle;
+    display: block;
+}
+
+.logo-text {
+    margin-left: var(--spacing-xs);
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
 .logo:hover .logo-img {
-    transform: rotate(360deg);
+    transform: scale(1.05);
 }
 
 .nav-menu {
     display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .nav-list {
@@ -537,10 +551,16 @@ section {
     align-items: center;
     gap: var(--spacing-lg);
     list-style: none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-item {
     position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .nav-link {
@@ -551,17 +571,21 @@ section {
     color: var(--dark-color);
     transition: var(--transition-fast);
     position: relative;
+    padding: var(--spacing-sm) var(--spacing-xs);
+    height: 100%;
+    text-decoration: none;
 }
 
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: -5px;
-    left: 0;
+    bottom: 0;
+    left: 50%;
     width: 0;
-    height: 2px;
-    background: var(--gradient-primary);
-    transition: width var(--transition-fast);
+    height: 3px;
+    background: var(--primary-color);
+    transition: all var(--transition-fast);
+    transform: translateX(-50%);
 }
 
 .nav-link:hover::after,
@@ -641,20 +665,26 @@ section {
 /* Mobile Navigation */
 @media (max-width: 768px) {
     .navbar {
-        padding: var(--spacing-sm) 0;
+        padding: 0;
         min-height: 70px;
     }
 
     .navbar .container {
-        min-height: 70px;
+        height: 70px;
+        padding: 0 var(--spacing-sm);
     }
 
     .nav-brand .logo {
-        min-height: 50px;
+        padding: var(--spacing-xs) 0;
     }
 
     .logo-img {
-        height: 42px;
+        height: 38px;
+        max-width: 140px;
+    }
+    
+    .logo-text {
+        font-size: var(--fs-base);
     }
 
     .nav-menu {
@@ -796,6 +826,9 @@ section {
     align-items: center;
     position: relative;
     z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
 }
 
 .hero-title {
@@ -2956,4 +2989,162 @@ section {
 
 .chat-header i {
     color: #fbbf24;
+}
+
+/* ===== ADDITIONAL ALIGNMENT FIXES ===== */
+
+/* Ensure consistent vertical centering for all flex containers */
+.d-flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+/* Fix text alignment issues */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Ensure forms are properly aligned */
+.form-group {
+    margin-bottom: var(--spacing-md);
+    width: 100%;
+}
+
+.form-control {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+
+/* Fix grid alignment across the site */
+.grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    align-items: stretch;
+}
+
+/* Enhanced mobile alignment fixes */
+@media (max-width: 768px) {
+    /* Ensure mobile containers don't overflow */
+    .container {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    /* Center mobile content */
+    .hero-content,
+    .section-content {
+        text-align: center;
+    }
+    
+    /* Fix mobile navigation alignment */
+    .nav-list {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-item {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Stack mobile buttons properly */
+    .btn-group,
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-sm);
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+    
+    /* Fix mobile grid layouts */
+    .grid,
+    .services-grid,
+    .jobs-grid,
+    .features-grid {
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-items: center;
+    }
+    
+    /* Center mobile cards */
+    .card,
+    .service-card,
+    .job-card {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+
+/* Fix specific component alignments */
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+}
+
+.stat-item {
+    text-align: center;
+    min-width: 120px;
+}
+
+/* Ensure logos are properly centered */
+.logo,
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-img {
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Fix footer alignment */
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 }
