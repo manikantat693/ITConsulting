@@ -5,7 +5,7 @@ const urlsToCache = [
   '/index.html',
   '/assets/css/style.css',
   '/assets/css/jobs.css',
-  '/assets/css/dashboard.css',
+
   '/assets/js/script.js',
   '/assets/images/logo.svg',
   '/assets/images/hero-illustration.svg',
