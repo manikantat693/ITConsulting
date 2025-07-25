@@ -53,17 +53,19 @@ mkdir -p logs
 mkdir -p backups
 
 # Check for Python 3
-if command -v python3 &> /dev/null; then
-    PYTHON_CMD="python3"
-elif command -v python &> /dev/null; then
-    PYTHON_CMD="python"
+if command -v node &> /dev/null; then
+    echo -e "${GREEN}✓ Using Node.js for development server${NC}"
 else
-    echo -e "${RED}❌ Python is not installed or not in PATH${NC}"
-    echo -e "${YELLOW}💡 Please install Python 3 to run the development server${NC}"
+    echo -e "${RED}❌ Node.js is not installed or not in PATH${NC}"
+    echo -e "${YELLOW}💡 Please install Node.js to run the development server${NC}"
     exit 1
 fi
 
-echo -e "${GREEN}✓ Using $PYTHON_CMD for development server${NC}"
+# Install dependencies if needed
+if [ ! -d "node_modules" ]; then
+    echo -e "${BLUE}📦 Installing dependencies...${NC}"
+    npm install
+fi
 
 # Display startup information
 echo -e "${CYAN}"
@@ -80,7 +82,7 @@ echo "╚═══════════════════════�
 echo -e "${NC}"
 
 # Start the development server
-echo -e "${GREEN}🚀 Starting CloudFlex IT development server...${NC}"
+echo -e "${GREEN}🚀 Starting CloudFlex IT development server with Node.js...${NC}"
 echo -e "${YELLOW}💡 Press Ctrl+C to stop the server${NC}"
 echo -e "${CYAN}🔗 Open http://$HOST:$PORT in your browser${NC}"
 echo ""
@@ -105,7 +107,7 @@ echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━
 trap 'echo -e "\n${YELLOW}🛑 Shutting down CloudFlex IT development server...${NC}"; echo "$(date): Server stopped" >> logs/startup.log; exit 0' INT
 
 # Start the server
-$PYTHON_CMD -m http.server $PORT --bind $HOST
+npm start
 
 # If we reach here, the server has stopped
 echo -e "${YELLOW}🛑 CloudFlex IT development server stopped${NC}"

@@ -47,21 +47,20 @@ if not exist "logs" mkdir logs
 if not exist "backups" mkdir backups
 
 REM Check for Python
-python --version >nul 2>&1
+node --version >nul 2>&1
 if %errorlevel% == 0 (
-    set PYTHON_CMD=python
-    echo [✓] Using Python for development server
+    echo [✓] Using Node.js for development server
 ) else (
-    python3 --version >nul 2>&1
-    if %errorlevel% == 0 (
-        set PYTHON_CMD=python3
-        echo [✓] Using Python3 for development server
-    ) else (
-        echo [❌] Python is not installed or not in PATH
-        echo [💡] Please install Python 3 to run the development server
-        pause
-        exit /b 1
-    )
+    echo [❌] Node.js is not installed or not in PATH
+    echo [💡] Please install Node.js to run the development server
+    pause
+    exit /b 1
+)
+
+REM Install dependencies if needed
+if not exist "node_modules" (
+    echo [📦] Installing dependencies...
+    npm install
 )
 
 REM Display server information
@@ -83,6 +82,7 @@ REM Log startup time
 echo %date% %time%: Starting CloudFlex IT local server on port %LOCAL_PORT% >> logs\startup.log
 
 echo [🚀] Starting CloudFlex IT development server...
+echo [🔧] Using Node.js instead of Python for better compatibility...
 echo [💡] Press Ctrl+C to stop the server
 echo [🔗] Open http://%LOCAL_HOST%:%LOCAL_PORT% in your browser
 echo.
@@ -102,8 +102,8 @@ echo [🎯] Server starting on http://%LOCAL_HOST%:%LOCAL_PORT%
 echo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 echo.
 
-REM Start the Python HTTP server
-%PYTHON_CMD% -m http.server %LOCAL_PORT%
+REM Start the Node.js server
+npm start
 
 REM If we reach here, the server has stopped
 echo.
